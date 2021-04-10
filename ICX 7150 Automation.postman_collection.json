@@ -1,0 +1,2009 @@
+{
+	"info": {
+		"_postman_id": "e5d388cf-11a5-4eff-bb51-64ab7e87852c",
+		"name": "ICX 7150 Automation",
+		"description": "Pre-Requisites\n\nThe following instructions assume you have the following components:\n-\tone vSZ-High Scale instance running 5.2.0.0.685 or later;\n-\tone ICX switch running router code SPR08092 or later, onboarded into the staging group;\n\nInstructions\n\nEdit the attribute values for the API call \"1. Get service ticket\" under the folder \"System\" to match with your vSZ instance:\n-\tchange the IP address in the \"Pre-request Script\"\n-\tchange the credentials in the \"Body\"\n\nSend the API call \"1. Get service ticket\" to obtain the authentication token.\n\nSend each of the subsequent API calls in the order which they appear.\n\nAfter you execute all calls, clean you vSZ instance by executing all API calls under the \"Delete objects\" folder,  in the order which they appear.\n\nYou can see the variable values in the \"Variables\" tab in this page.\n\nFor more information about this collection please contact marcelo.molinari@commscope.com\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "System",
+			"item": [
+				{
+					"name": "1. Get service ticket",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									"const dateNow = new Date();\r",
+									"var epoch = dateNow.getTime();\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"serviceTicket\", jsonData.serviceTicket);\r",
+									"pm.collectionVariables.set(\"startTime\", epoch - 3600000);\r",
+									"pm.collectionVariables.set(\"endTime\", epoch);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f40a9ce2-c556-42ec-80aa-3a2fc60d32ce",
+								"exec": [
+									"pm.collectionVariables.set(\"host\", \"10.0.0.32\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin\",\n  \"password\": \"ruckus123!\"\n}\n\n\t",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/wsg/api/public/v8_1/serviceTicket",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"wsg",
+								"api",
+								"public",
+								"v8_1",
+								"serviceTicket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Create domain",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "98281833-8494-4dbf-8ca1-ab116fa02254",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"switchDomainID\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Florida\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/wsg/api/public/v9_0/domains?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"wsg",
+								"api",
+								"public",
+								"v9_0",
+								"domains"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Get domains",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ce54a5e1-df38-4a3a-b5b9-b6db6ca40b3a",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"switchDomainID\", jsonData.list[0].id);\r",
+									"pm.collectionVariables.set(\"parentDomainID\", jsonData.list[0].parentDomainId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{host}}:8443/wsg/api/public/v9_0/domains?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"wsg",
+								"api",
+								"public",
+								"v9_0",
+								"domains"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Create switch group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3769bfa6-f310-464b-8cb4-00b0517f5e6e",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"switchGroupID\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Deerfield\",\n    \"domainId\": \"{{switchDomainID}}\",\n    \"description\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/group?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"group"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. List switch groups",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3769bfa6-f310-464b-8cb4-00b0517f5e6e",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"switchGroupID\", jsonData.data.list[0].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/group/ids/byDomain/{{switchDomainID}}?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"group",
+								"ids",
+								"byDomain",
+								"{{switchDomainID}}"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. Get switch group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3769bfa6-f310-464b-8cb4-00b0517f5e6e",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/group/{{switchGroupID}}?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"group",
+								"{{switchGroupID}}"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7. Get switch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"switchMAC\", jsonData.list[0].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"filters\": [\r\n    {\r\n      \"type\": \"DOMAIN\",\r\n      \"value\": \"{{parentDomainID}}\",\r\n      \"operator\": \"eq\"\r\n    }\r\n    ]\r\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/switch?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"switch"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8. Move switch to group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ce54a5e1-df38-4a3a-b5b9-b6db6ca40b3a",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    \"{{switchMAC}}\"\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/switch/move/{{switchGroupID}}?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"switch",
+								"move",
+								"{{switchGroupID}}"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "9. Get switch details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"filters\": [\r\n    {\r\n      \"type\": \"DOMAIN\",\r\n      \"value\": \"{{domainID}}\",\r\n      \"operator\": \"eq\"\r\n    }\r\n    ]\r\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/switch/{{switchMAC}}?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"switch",
+								"{{switchMAC}}"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10. Get switch firmware",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/switch/{{switchMAC}}?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"switch",
+								"{{switchMAC}}"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "VLANs and interfaces",
+			"item": [
+				{
+					"name": "1. List switch interfaces",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filters\": [\n        {\n            \"type\": \"DOMAIN\",\n            \"value\": \"{{switchDomainID}}\"\n        }\n    ],\n    \"fullTextSearch\": {\n    \"type\": \"OR\",\n    \"value\": \"\"\n  },\n  \"attributes\": [\n    \"*\"\n  ],\n  \"page\": 1,\n  \"limit\": 8,\n  \"extraFilters\": [\n    {\n      \"value\": \"{{switchMAC}}\",\n      \"type\": \"SWITCH\"\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/switch/ports/details?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"switch",
+								"ports",
+								"details"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Get port settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"portID\", jsonData.list[0].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"extraFilters\": [\r\n    {\r\n      \"type\": \"SWITCH_ID\",\r\n      \"value\": \"{{switchMAC}}\"\r\n    },\r\n       {\r\n      \"type\": \"PORT\",\r\n      \"value\": \"1/2/2\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/portSettings/query?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"portSettings",
+								"query"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Create vlan and add interface",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"vlanID\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vlanId\": 20,\n    \"pushTimeType\": \"NOW\",\n    \"ports\": [\n        {\n            \"switchModel\": \"ICX7150-C12P\",\n            \"untaggedPorts\": \"1/1/8\"\n        }\n    ],\n    \"groupId\": \"{{switchGroupID}}\",\n    \"switchId\": \"{{switchMAC}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/vlans?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"vlans"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Configure interface",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"portName\": \"Backbone\",\r\n  \"portEnabled\": true,\r\n  \"taggedVlans\": \"20\",\r\n  \"untaggedVlans\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/portSettings/{{portID}}?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"portSettings",
+								"{{portID}}"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Get vlans",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2719f10b-f19f-4604-b474-432782fc0a3e",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/vlans?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"vlans"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. Get port  neighbor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filters\": [\n        {\n            \"type\": \"DOMAIN\",\n            \"value\": \"{{switchDomainID}}\"\n        }\n    ],\n    \"fullTextSearch\": {\n    \"type\": \"OR\",\n    \"value\": \"1/1/2\"\n  },\n  \"attributes\": [\n    \"*\"\n  ],\n  \"page\": 1,\n  \"limit\": 8,\n  \"extraFilters\": [\n    {\n      \"value\": \"{{switchMAC}}\",\n      \"type\": \"SWITCH\"\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/switch/ports/details?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"switch",
+								"ports",
+								"details"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7. Update vlan configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"APs VLAN\",\r\n  \"pushTimeType\": \"NOW\",\r\n  \"ports\": [\r\n    {\r\n      \"switchModel\": \"ICX7150-C12P\",\r\n      \"untaggedPorts\": \"1/1/8,1/1/9\",\r\n      \"taggedPorts\": \"1/1/10\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/vlans/{{vlanID}}?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"vlans",
+								"{{vlanID}}"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8. Create virtual interface",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "92bf5107-a9d5-44c4-aa58-d4ef82813d58",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"veID\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"veId\": 20,\n    \"switchId\": \"{{switchMAC}}\",\n    \"groupId\": \"{{switchGroupID}}\",\n    \"vlanId\": 20,\n    \"ipAddress\": \"20.20.20.1\",\n    \"subnetMask\": \"255.255.255.0\"\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/veConfigs?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"veConfigs"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}",
+									"description": "(Required) Service Ticket is required in the Request URI Parameters of all API requests (except for the logon API)."
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"veId\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"switchId\": \"<string>\",\n    \"groupId\": \"<string>\",\n    \"ospfArea\": \"<string>\",\n    \"vlanId\": \"<integer>\",\n    \"dhcpRelayAgent\": \"<string>\",\n    \"ipAddress\": \"<string>\",\n    \"subnetMask\": \"<string>\",\n    \"inAclConfigUUID\": \"<string>\",\n    \"outAclConfigUUID\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/veConfigs?serviceTicket=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"veConfigs"
+									],
+									"query": [
+										{
+											"key": "serviceTicket",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"veId\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"switchId\": \"<string>\",\n    \"groupId\": \"<string>\",\n    \"ospfArea\": \"<string>\",\n    \"vlanId\": \"<integer>\",\n    \"dhcpRelayAgent\": \"<string>\",\n    \"ipAddress\": \"<string>\",\n    \"subnetMask\": \"<string>\",\n    \"inAclConfigUUID\": \"<string>\",\n    \"outAclConfigUUID\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/veConfigs?serviceTicket=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"veConfigs"
+									],
+									"query": [
+										{
+											"key": "serviceTicket",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": \"<string>\"\n}"
+						},
+						{
+							"name": "Forbidden - Lack of admin privilege",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"veId\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"switchId\": \"<string>\",\n    \"groupId\": \"<string>\",\n    \"ospfArea\": \"<string>\",\n    \"vlanId\": \"<integer>\",\n    \"dhcpRelayAgent\": \"<string>\",\n    \"ipAddress\": \"<string>\",\n    \"subnetMask\": \"<string>\",\n    \"inAclConfigUUID\": \"<string>\",\n    \"outAclConfigUUID\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/veConfigs?serviceTicket=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"veConfigs"
+									],
+									"query": [
+										{
+											"key": "serviceTicket",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unprocessable Entity - Business rule violation",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"veId\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"switchId\": \"<string>\",\n    \"groupId\": \"<string>\",\n    \"ospfArea\": \"<string>\",\n    \"vlanId\": \"<integer>\",\n    \"dhcpRelayAgent\": \"<string>\",\n    \"ipAddress\": \"<string>\",\n    \"subnetMask\": \"<string>\",\n    \"inAclConfigUUID\": \"<string>\",\n    \"outAclConfigUUID\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/veConfigs?serviceTicket=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"veConfigs"
+									],
+									"query": [
+										{
+											"key": "serviceTicket",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"veId\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"switchId\": \"<string>\",\n    \"groupId\": \"<string>\",\n    \"ospfArea\": \"<string>\",\n    \"vlanId\": \"<integer>\",\n    \"dhcpRelayAgent\": \"<string>\",\n    \"ipAddress\": \"<string>\",\n    \"subnetMask\": \"<string>\",\n    \"inAclConfigUUID\": \"<string>\",\n    \"outAclConfigUUID\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/veConfigs?serviceTicket=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"veConfigs"
+									],
+									"query": [
+										{
+											"key": "serviceTicket",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "9. Get virtual interfaces",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/veConfigs?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"veConfigs"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10. Configure virtual interface",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"switchId\":\"{{switchMAC}}\",\r\n  \"vlanId\": 20,\r\n  \"ipAddress\": \"30.30.30.35\",\r\n  \"subnetMask\": \"255.255.255.0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/veConfigs/{{veID}}?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"veConfigs",
+								"{{veID}}"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ACLs",
+			"item": [
+				{
+					"name": "1. Create ACL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"switchAclID\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"ACL100\",\r\n  \"aclType\": \"EXTENDED\",\r\n  \"groupId\": \"{{switchGroupID}}\",\r\n  \"switchId\": \"{{switchMAC}}\",\r\n  \"pushTimeType\": \"NOW\",\r\n  \"aclRule\": [\r\n    {\r\n      \"seq\": 10,\r\n      \"action\": \"DENY\",\r\n      \"protocol\": \"TCP\",\r\n      \"srcNetwork\": \"20.20.20.0/24\",\r\n      \"destNetwork\": \"any\",\r\n      \"srcPort\": \"0\",\r\n      \"destPort\": \"80\"\r\n    },\r\n    {\r\n      \"seq\": 65000,\r\n      \"action\": \"PERMIT\",\r\n      \"protocol\": \"IP\",\r\n      \"srcNetwork\": \"any\",\r\n      \"destNetwork\": \"any\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/accessControls?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"accessControls"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Get ACLs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filters\": [\n        {\n            \"type\": \"SWITCH_GROUP\",\n            \"value\": \"{{switchGroupID}}\"\n        }\n    ],\n    \"sortInfo\": {\n        \"sortColumn\": \"name\",\n        \"dir\": \"ASC\"\n    },\n    \"page\": 1,\n    \"limit\": 8\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/accessControls/query?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"accessControls",
+								"query"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Update ACL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"aclType\": \"EXTENDED\",\r\n  \"pushTimeType\": \"NOW\",\r\n  \"aclRule\": [\r\n    {\r\n        \"seq\": 20,\r\n        \"action\": \"PERMIT\",\r\n        \"protocol\": \"TCP\",\r\n        \"srcNetwork\": \"30.30.30.0/24\",\r\n        \"destNetwork\": \"any\",\r\n        \"srcPort\": \"0\",\r\n        \"destPort\": \"80\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/accessControls/{{switchAclID}}?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"accessControls",
+								"{{switchAclID}}"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Clients and traffic",
+			"item": [
+				{
+					"name": "1. Get wired clients",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filters\": [\n        {\n            \"type\": \"DOMAIN\",\n            \"value\": \"{{switchDomainID}}\"\n        }\n    ],\n    \"fullTextSearch\": {\n        \"type\": \"AND\",\n        \"value\": \"\"\n    },\n    \"attributes\": [\n        \"*\"\n    ],\n    \"page\": 1,\n    \"limit\": 15\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/switchClientVisibility/query?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"switchClientVisibility",
+								"query"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Get port status, traffic and errors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filters\": [\n        {\n            \"type\": \"DOMAIN\",\n            \"value\": \"{{switchDomainID}}\"\n        }\n    ],\n    \"fullTextSearch\": {\n    \"type\": \"OR\",\n    \"value\": \"1/1/10\"\n  },\n  \"attributes\": [\n    \"*\"\n  ],\n  \"page\": 1,\n  \"limit\": 8,\n  \"extraFilters\": [\n    {\n      \"value\": \"{{switchMAC}}\",\n      \"type\": \"SWITCH\"\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/switch/ports/details?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"switch",
+								"ports",
+								"details"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Delete objects",
+			"item": [
+				{
+					"name": "1. Delete ACL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/accessControls/{{switchAclID}}?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"accessControls",
+								"{{switchAclID}}"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Delete virtual interface",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/veConfigs/{{veID}}?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"veConfigs",
+								"{{veID}}"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Delete vlan",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc42a92-5800-4087-a5c6-dc3a8b53bc75",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/vlans/{{vlanID}}?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"vlans",
+								"{{vlanID}}"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Delete switch",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    \"{{switchMAC}}\"\n]",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/switch?serviceTicket=<string>",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"switch"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "<string>",
+									"description": "(Required) Service Ticket is required in the Request URI Parameters of all API requests (except for the logon API)."
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Forbidden - Lack of admin privilege",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/switch?serviceTicket=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"switch"
+									],
+									"query": [
+										{
+											"key": "serviceTicket",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/switch?serviceTicket=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"switch"
+									],
+									"query": [
+										{
+											"key": "serviceTicket",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"rawDataTotalCount\": \"<integer>\",\n \"totalCount\": \"<integer>\",\n \"hasMore\": \"<boolean>\",\n \"firstIndex\": \"<integer>\",\n \"extra\": \"<object>\",\n \"list\": [\n  {\n   \"id\": \"<string>\",\n   \"name\": \"<string>\"\n  },\n  {\n   \"id\": \"<string>\",\n   \"name\": \"<string>\"\n  }\n ]\n}"
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/switch?serviceTicket=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"switch"
+									],
+									"query": [
+										{
+											"key": "serviceTicket",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/switch?serviceTicket=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"switch"
+									],
+									"query": [
+										{
+											"key": "serviceTicket",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "5. Delete switch group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ce54a5e1-df38-4a3a-b5b9-b6db6ca40b3a",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{host}}:8443/switchm/api/v9_0/group/{{switchGroupID}}?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"switchm",
+								"api",
+								"v9_0",
+								"group",
+								"{{switchGroupID}}"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. Delete domain",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ce54a5e1-df38-4a3a-b5b9-b6db6ca40b3a",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{host}}:8443/wsg/api/public/v9_0/domains/{{switchDomainID}}?serviceTicket={{serviceTicket}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"port": "8443",
+							"path": [
+								"wsg",
+								"api",
+								"public",
+								"v9_0",
+								"domains",
+								"{{switchDomainID}}"
+							],
+							"query": [
+								{
+									"key": "serviceTicket",
+									"value": "{{serviceTicket}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "888df5cc-8bf1-4273-a884-88c012563d05",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "02086642-7b46-4b32-a57d-87a94689a9e3",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "f192401d-5c6a-4ba8-9afc-518ad150735f",
+			"key": "host",
+			"value": "10.0.0.32",
+			"type": "string"
+		},
+		{
+			"id": "bddd9e2e-0185-46e3-bca9-a740c5eab342",
+			"key": "endTime",
+			"value": 1587010122394,
+			"type": "number"
+		},
+		{
+			"id": "bb2727d8-5013-4a7b-b87e-56a1ed5fe59e",
+			"key": "serviceTicket",
+			"value": "ST-7-kdUEkWfdJoffdkcBT6tS-SZ5200685",
+			"type": "string"
+		},
+		{
+			"id": "4023f953-1e48-47f9-b494-6ebedc7a3503",
+			"key": "startTime",
+			"value": 1587006522394,
+			"type": "number"
+		},
+		{
+			"id": "3541ea26-2a50-4bf6-ae88-b16382a62047",
+			"key": "switchDomainID",
+			"value": "f6d30202-4194-4975-a842-f9d13e5ce26d",
+			"type": "string"
+		},
+		{
+			"id": "815097e5-668a-4343-ad51-412fef6448b8",
+			"key": "parentDomainID",
+			"value": "8b2081d5-9662-40d9-a3db-2a3cf4dde3f7",
+			"type": "string"
+		},
+		{
+			"id": "dc42f7d3-ec25-4aac-b8eb-9b7905d40654",
+			"key": "switchGroupID",
+			"value": "8e8907fd-e0ef-4357-8a03-3e5f565973b0",
+			"type": "string"
+		},
+		{
+			"id": "cd86b137-76d0-4bca-94ea-eb7af59a22bc",
+			"key": "switchMAC",
+			"value": "C0:C5:20:92:A5:2D",
+			"type": "string"
+		},
+		{
+			"id": "e469b85e-3757-4541-b455-d9e7eec04279",
+			"key": "portID",
+			"value": "530b4888-6df0-44c3-acb2-7fec954cd7eb",
+			"type": "string"
+		},
+		{
+			"id": "fba04910-d61c-4efb-afc9-4b5804ff5b5e",
+			"key": "vlanID",
+			"value": "adf37000-ce70-4c22-9c17-c7bb7e5ad25d",
+			"type": "string"
+		},
+		{
+			"id": "61d22561-1779-4feb-9c06-f8e773fa1965",
+			"key": "veID",
+			"value": "554b056b-9102-4734-b841-dc5382f63835",
+			"type": "string"
+		},
+		{
+			"id": "358fcfbb-3c0a-41ca-a628-64f4511f0514",
+			"key": "switchAclID",
+			"value": "c7f0f895-c2a7-4e41-af2f-89b562b22b5d",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -32,7 +32,7 @@
 							"script": {
 								"id": "f40a9ce2-c556-42ec-80aa-3a2fc60d32ce",
 								"exec": [
-									"pm.collectionVariables.set(\"host\", \"10.0.0.32\");"
+									"pm.collectionVariables.set(\"host\", \"A.B.C.D\");"
 								],
 								"type": "text/javascript"
 							}
@@ -43,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"username\": \"admin\",\n  \"password\": \"ruckus123!\"\n}\n\n\t",
+							"raw": "{\n  \"username\": \"admin\",\n  \"password\": \"password\"\n}\n\n\t",
 							"options": {
 								"raw": {}
 							}
@@ -1935,7 +1935,7 @@
 		{
 			"id": "f192401d-5c6a-4ba8-9afc-518ad150735f",
 			"key": "host",
-			"value": "10.0.0.32",
+			"value": "A.B.C.D",
 			"type": "string"
 		},
 		{

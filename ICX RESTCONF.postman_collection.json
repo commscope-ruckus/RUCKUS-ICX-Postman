@@ -297,6 +297,63 @@
 					"response": []
 				},
 				{
+					"name": "Replace TACACS server",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"server-groups\": {\n        \"server-group\": [\n            {\n                \"name\": \"tacacs-default-group\",\n                \"config\": {\n                    \"name\": \"tacacs-default-group\",\n                    \"type\": \"TACACS\"\n                },\n                \"servers\": {\n                    \"server\": [\n                        {\n                            \"address\": \"83.1.1.1\",\n                            \"config\": {\n                                \"name\": \"83.1.1.1\",\n                                \"address\": \"83.1.1.1\"\n                            },\n                            \"tacacs\": {\n                                \"config\": {\n                                    \"port\": \"1234\",\n                                    \"secret-key\": \"test1234\"\n                                }\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/aaa/server-groups",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"aaa",
+								"server-groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Delete TACACS server",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
@@ -473,6 +530,63 @@
 					"response": []
 				},
 				{
+					"name": "Replace RADIUS server",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"server-groups\": {\n        \"server-group\": [\n            {\n                \"name\": \"radius-default-group\",\n                \"config\": {\n                    \"name\": \"radius-default-group\",\n                    \"type\": \"RADIUS\"\n                },\n                \"servers\": {\n                    \"server\": [\n                        {\n                            \"address\": \"77.1.1.1\",\n                            \"config\": {\n                                \"name\": \"77.1.1.1\",\n                                \"address\": \"77.1.1.1\"\n                            },\n                            \"radius\": {\n                                \"config\": {\n                                    \"auth-port\": \"1812\",\n                                    \"acct-port\": \"1813\",\n                                    \"secret-key\": \"radiust1234\",\n                                    \"retransmit-attempts\": 2,\n                                    \"icx-openconfig-aaa-aug:dot1x\": true,\n                                    \"icx-openconfig-aaa-aug:web-auth\": true\n                                }\n                            }\n                        },\n                        {\n                            \"address\": \"77.1.1.2\",\n                            \"config\": {\n                                \"name\": \"77.1.1.2\",\n                                \"address\": \"77.1.1.2\"\n                            },\n                            \"radius\": {\n                                \"config\": {\n                                    \"auth-port\": \"1812\",\n                                    \"acct-port\": \"1813\",\n                                    \"secret-key\": \"radiust1234\",\n                                    \"retransmit-attempts\": 2,\n                                    \"icx-openconfig-aaa-aug:dot1x\": true,\n                                    \"icx-openconfig-aaa-aug:web-auth\": true\n                                }\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/aaa/server-groups",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"aaa",
+								"server-groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Delete RADIUS server",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
@@ -529,6 +643,63 @@
 								"servers",
 								"server",
 								"66.1.1.1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all servers and server groups",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/aaa/server-groups",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"aaa",
+								"server-groups"
 							]
 						}
 					},
@@ -593,7 +764,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete all servers and server groups",
+					"name": "Enable AAA CoA",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -615,7 +786,242 @@
 								}
 							]
 						},
-						"method": "DELETE",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"icx-openconfig-aaa-aug:coa\": {\n        \"enable\": \"true\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/aaa/authorization/coa",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"aaa",
+								"authorization",
+								"coa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disable AAA CoA",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"icx-openconfig-aaa-aug:coa\": {\n        \"enable\": \"false\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/aaa/authorization/coa",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"aaa",
+								"authorization",
+								"coa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disable AAA CoA ignore options",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ignore\": {\n        \"flip-port\": \"false\",\n        \"disable-port\": \"false\",\n        \"reauth-host\": \"false\",\n        \"modify-acl\": \"false\",\n        \"dm-request\": \"false\"\n    }\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/aaa/authorization/coa/ignore",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"aaa",
+								"authorization",
+								"coa",
+								"ignore"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update AAA CoA options",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ignore\": {\n        \"flip-port\": \"true\",\n        \"disable-port\": \"true\",\n        \"reauth-host\": \"true\",\n        \"dm-request\": \"true\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/aaa/authorization/coa/ignore",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"aaa",
+								"authorization",
+								"coa",
+								"ignore"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AAA CoA options",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
 						"header": [
 							{
 								"key": "Accept",
@@ -633,7 +1039,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{host}}/restconf/data/system/aaa/server-groups",
+							"raw": "https://{{host}}/restconf/data/system/aaa/authorization/coa",
 							"protocol": "https",
 							"host": [
 								"{{host}}"
@@ -643,7 +1049,181 @@
 								"data",
 								"system",
 								"aaa",
-								"server-groups"
+								"authorization",
+								"coa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enable Dot1x RADIUS authentication",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"authentication\": {\n        \"icx-openconfig-aaa-aug:dot1x\": {\n            \"default\": \"radius\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/aaa/authentication",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"aaa",
+								"authentication"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disable Dot1x RADIUS authentication",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"authentication\": {\n        \"icx-openconfig-aaa-aug:dot1x\": {\n            \"default\": \"none\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/aaa/authentication",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"aaa",
+								"authentication"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get dot1x RADIUS authentication status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/aaa/authentication/dot1x",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"aaa",
+								"authentication",
+								"dot1x"
 							]
 						}
 					},
@@ -682,7 +1262,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user\": [\n        {\n            \"username\": \"Marcelo\",\n            \"config\": {\n                \"username\": \"Marcelo\",\n                \"password\": \"ruckus123!\",\n                \"icx-openconfig-aaa-aug:privilege\": 0\n            }\n        }\n    ]\n}",
+							"raw": "{\n    \"user\": [\n        {\n            \"username\": \"Sonia\",\n            \"config\": {\n                \"username\": \"Sonia\",\n                \"password\": \"ruckus123!\",\n                \"icx-openconfig-aaa-aug:privilege\": 0\n            }\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -740,7 +1320,65 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"users\": {\n        \"user\": [\n            {\n                \"username\": \"Marcelo\",\n                \"config\": {\n                    \"username\": \"Marcelo\",\n                    \"password\": \"simone\",\n                    \"icx-openconfig-aaa-aug:privilege\": 0\n                }\n            }\n        ]\n    }\n}",
+							"raw": "{\n    \"users\": {\n        \"user\": [\n            {\n                \"username\": \"Simone\",\n                \"config\": {\n                    \"username\": \"Simone\",\n                    \"password\": \"simone\",\n                    \"icx-openconfig-aaa-aug:privilege\": 0\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/aaa/authentication/users",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"aaa",
+								"authentication",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Replace AAA user",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"users\": {\n        \"user\": [\n            {\n                \"username\": \"admin\",\n                \"config\": {\n                    \"username\": \"admin\",\n                    \"password\": \"simone\",\n                    \"icx-openconfig-aaa-aug:privilege\": 0\n                }\n            }\n        ]\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1848,6 +2486,63 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"servers\": {\n        \"server\": [\n            {\n                \"address\": \"8.8.4.4\",\n                \"config\": {\n                    \"address\": \"8.8.4.4\"\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/dns/servers",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"dns",
+								"servers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Replace dns servers",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"servers\": {\n        \"server\": [\n            {\n                \"address\": \"30.1.1.1\",\n                \"config\": {\n                    \"address\": \"30.1.1.1\"\n                }\n            }\n        ]\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3077,7 +3772,63 @@
 					"response": []
 				},
 				{
-					"name": "Disable lldp",
+					"name": "Enable LLDP",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"config\": {\n        \"enabled\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/lldp/config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"lldp",
+								"config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disable LLDP",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -3133,7 +3884,63 @@
 					"response": []
 				},
 				{
-					"name": "Get lldp status",
+					"name": "Disable LLDP",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"config\": {\n        \"enabled\": false\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/lldp/config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"lldp",
+								"config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get LLDP status",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -3180,7 +3987,7 @@
 					"response": []
 				},
 				{
-					"name": "Get lldp all interfaces status",
+					"name": "Get LLDP all interfaces status",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -3227,7 +4034,7 @@
 					"response": []
 				},
 				{
-					"name": "Get lldp interface status",
+					"name": "Get LLDP interface status",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -4032,6 +4839,150 @@
 					"response": []
 				},
 				{
+					"name": "Enable PoE on interface",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/2\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"poe\": {\n        \"config\": {\n            \"enabled\": true\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces/interface=ethernet {{interface}}/ethernet/poe",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces",
+								"interface=ethernet {{interface}}",
+								"ethernet",
+								"poe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enable PoE on interface",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/2\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"poe\": {\n        \"config\": {\n            \"enabled\": true\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces/interface=ethernet {{interface}}/ethernet/poe",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces",
+								"interface=ethernet {{interface}}",
+								"ethernet",
+								"poe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Disable PoE on interface",
 					"event": [
 						{
@@ -4104,7 +5055,7 @@
 					"response": []
 				},
 				{
-					"name": "Enable PoE on interface",
+					"name": "Disable PoE on interface",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -4140,7 +5091,7 @@
 								}
 							]
 						},
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Accept",
@@ -4150,7 +5101,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"poe\": {\n        \"config\": {\n            \"enabled\": true\n        }\n    }\n}",
+							"raw": "{\n    \"poe\": {\n        \"config\": {\n            \"enabled\": false\n        }\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -5065,6 +6016,78 @@
 								"interface",
 								"ethernet {{interface}}",
 								"ethernet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Replace VLANs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/3/1\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vlans\": {\n        \"vlan\": [\n            {\n                \"vlan-id\": 33,\n                \"config\": {\n                    \"vlan-id\": 33,\n                    \"name\": \"home-vlan\"\n                }\n            },\n            {\n                \"vlan-id\": 1,\n                \"config\": {\n                    \"vlan-id\": 1,\n                    \"name\": \"DEFAULT-VLAN\"\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/network-instances/network-instance/default-vrf/vlans",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"network-instances",
+								"network-instance",
+								"default-vrf",
+								"vlans"
 							]
 						}
 					},

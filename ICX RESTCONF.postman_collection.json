@@ -15,7 +15,9 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.collectionVariables.set(\"host\", \"10.0.0.213\");"
+									"pm.collectionVariables.set(\"host\", \"10.0.0.213\")",
+									"pm.collectionVariables.set(\"Username\", \"admin\")",
+									"pm.collectionVariables.set(\"Password\", \"ruckus123!\")"
 								],
 								"type": "text/javascript"
 							}
@@ -70,7 +72,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.collectionVariables.set(\"host\", \"10.0.0.213\");"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -3350,7 +3352,65 @@
 					"response": []
 				},
 				{
-					"name": "Get ospf areas",
+					"name": "Update OSPF area",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"protocols\": {\n        \"protocol\": [\n            {\n                \"identifier\": \"OSPF\",\n                \"name\": \"icx-ospf\",\n                \"config\": {\n                    \"identifier\": \"OSPF\",\n                    \"name\": \"icx-ospf\"\n                },\n                \"ospfv2\": {\n                    \"areas\": {\n                        \"area\": [\n                            {\n                                \"identifier\": \"100\",\n                                \"config\": {\n                                    \"identifier\": \"100\"\n                                }\n                            }\n                        ]\n                    }\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/network-instances/network-instance/default-vrf/protocols",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"network-instances",
+								"network-instance",
+								"default-vrf",
+								"protocols"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get OSPF areas and interface bindings",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -3404,73 +3464,7 @@
 					"response": []
 				},
 				{
-					"name": "Add ospf area to interface",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "ruckus123!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{{\n    \"interface\": [\n        {\n            \"id\": \"ethernet 1/1/2\",\n            \"config\": {\n                \"id\": \"ethernet 1/1/2\"\n            }\n        }\n    ]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{host}}/restconf/data/network-instances/network-instance/default-vrf/protocols/protocol/OSPF/icx-ospf/ospfv2/areas/area/51/interfaces",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"network-instances",
-								"network-instance",
-								"default-vrf",
-								"protocols",
-								"protocol",
-								"OSPF",
-								"icx-ospf",
-								"ospfv2",
-								"areas",
-								"area",
-								"51",
-								"interfaces"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete ospf area",
+					"name": "Delete OSPF area",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -3501,7 +3495,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{host}}/restconf/data/network-instances/network-instance/default-vrf/protocols/protocol/OSPF/icx-ospf/ospfv2/areas/area/51\n",
+							"raw": "https://{{host}}/restconf/data/network-instances/network-instance/default-vrf/protocols/protocol/OSPF/icx-ospf/ospfv2/areas/area/200.10.10.10",
 							"protocol": "https",
 							"host": [
 								"{{host}}"
@@ -3519,14 +3513,14 @@
 								"ospfv2",
 								"areas",
 								"area",
-								"51\n"
+								"200.10.10.10"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Delete all ospf areas",
+					"name": "Delete all OSPF areas",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -3574,6 +3568,154 @@
 								"icx-ospf",
 								"ospfv2",
 								"areas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add OSPF area to interface",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interface\": [\n        {\n            \"id\": \"ethernet 1/1/2\",\n            \"config\": {\n                \"id\": \"ethernet 1/1/2\"\n            }\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/network-instances/network-instance/default-vrf/protocols/protocol/OSPF/icx-ospf/ospfv2/areas/area/100/interfaces",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"network-instances",
+								"network-instance",
+								"default-vrf",
+								"protocols",
+								"protocol",
+								"OSPF",
+								"icx-ospf",
+								"ospfv2",
+								"areas",
+								"area",
+								"100",
+								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove OSPF area from interface",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/11\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/network-instances/network-instance/default-vrf/protocols/protocol/OSPF/icx-ospf/ospfv2/areas/area/100/interfaces/interface/ethernet {{interface}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"network-instances",
+								"network-instance",
+								"default-vrf",
+								"protocols",
+								"protocol",
+								"OSPF",
+								"icx-ospf",
+								"ospfv2",
+								"areas",
+								"area",
+								"100",
+								"interfaces",
+								"interface",
+								"ethernet {{interface}}"
 							]
 						}
 					},
@@ -3676,7 +3818,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{host}}/restconf/data/interfaces/interface=ethernet%20{{interface}}/ethernet/poe/state",
+							"raw": "https://{{host}}/restconf/data/interfaces/interface=ethernet {{interface}}/ethernet/poe/state",
 							"protocol": "https",
 							"host": [
 								"{{host}}"
@@ -3685,10 +3827,205 @@
 								"restconf",
 								"data",
 								"interfaces",
-								"interface=ethernet%20{{interface}}",
+								"interface=ethernet {{interface}}",
 								"ethernet",
 								"poe",
 								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get PoE enabled status on interface",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/1\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces/interface=ethernet {{interface}}/ethernet/poe/state/enabled",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces",
+								"interface=ethernet {{interface}}",
+								"ethernet",
+								"poe",
+								"state",
+								"enabled"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get PoE power class on interface",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/1\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces/interface=ethernet {{interface}}/ethernet/poe/state/power-class",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces",
+								"interface=ethernet {{interface}}",
+								"ethernet",
+								"poe",
+								"state",
+								"power-class"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get PoE power used on interface",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/1\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces/interface=ethernet {{interface}}/ethernet/poe/state/power-used",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces",
+								"interface=ethernet {{interface}}",
+								"ethernet",
+								"poe",
+								"state",
+								"power-used"
 							]
 						}
 					},
@@ -3844,6 +4181,62 @@
 			"name": "STP",
 			"item": [
 				{
+					"name": "Enable RSTP in vlan",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vlan\": [\n        {\n            \"vlan-id\": 33,\n            \"config\": {\n                \"vlan-id\": 33\n            }\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/stp/rapid-pvst",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"stp",
+								"rapid-pvst"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get spanning tree status",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
@@ -3890,7 +4283,56 @@
 					"response": []
 				},
 				{
-					"name": "Set bpdu-guard on interface",
+					"name": "Get rstp by vlan",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/stp/rapid-pvst/vlan/33",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"stp",
+								"rapid-pvst",
+								"vlan",
+								"33"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enable bpdu-guard on interface",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -3946,7 +4388,7 @@
 					"response": []
 				},
 				{
-					"name": "Get rstp by vlan",
+					"name": "Disable bpdu-guard on interface",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -3968,7 +4410,7 @@
 								}
 							]
 						},
-						"method": "GET",
+						"method": "PATCH",
 						"header": [
 							{
 								"key": "Accept",
@@ -3976,6 +4418,71 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"name\": \"ethernet 1/2/1\",\n                \"config\": {\n                    \"name\": \"ethernet 1/2/1\",\n                    \"bpdu-guard\": false\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/stp/interfaces",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"stp",
+								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disable RSTP in vlan",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "https://{{host}}/restconf/data/stp/rapid-pvst/vlan/33",
 							"protocol": "https",
@@ -4084,7 +4591,65 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"protocol\": {\n        \"identifier\": \"openconfig-policy-types:STATIC\",\n        \"name\": \"icx-static\",\n        \"config\": {\n            \"identifier\": \"openconfig-policy-types:STATIC\",\n            \"name\": \"icx-static\"\n        },\n        \"static-routes\": {\n            \"static\": [\n                {\n                    \"prefix\": \"33.1.1.1/24\",\n                    \"config\": {\n                        \"prefix\": \"33.1.1.1/24\"\n                    },\n                    \"next-hops\": {\n                        \"next-hop\": [\n                            {\n                                \"index\": \"10.0.0.1\",\n                                \"config\": {\n                                    \"index\": \"10.0.0.1\",\n                                    \"next-hop\": \"10.0.0.1\"\n                                }\n                            }\n                        ]\n                    }\n                }\n            ]\n        }\n    }\n}",
+							"raw": "{\n    \"protocol\": {\n        \"identifier\": \"openconfig-policy-types:STATIC\",\n        \"name\": \"icx-static\",\n        \"config\": {\n            \"identifier\": \"openconfig-policy-types:STATIC\",\n            \"name\": \"icx-static\"\n        },\n        \"static-routes\": {\n            \"static\": [\n                {\n                    \"prefix\": \"99.1.1.0/24\",\n                    \"config\": {\n                        \"prefix\": \"99.1.1.0/24\"\n                    },\n                    \"next-hops\": {\n                        \"next-hop\": [\n                            {\n                                \"index\": \"10.0.0.1\",\n                                \"config\": {\n                                    \"index\": \"10.0.0.1\",\n                                    \"next-hop\": \"10.0.0.1\"\n                                }\n                            }\n                        ]\n                    }\n                }\n            ]\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/network-instances/network-instance/default-vrf/protocols",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"network-instances",
+								"network-instance",
+								"default-vrf",
+								"protocols"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update static route",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"protocols\": {\n        \"protocol\": {\n            \"identifier\": \"openconfig-policy-types:STATIC\",\n            \"name\": \"icx-static\",\n            \"config\": {\n                \"identifier\": \"openconfig-policy-types:STATIC\",\n                \"name\": \"icx-static\"\n            },\n            \"static-routes\": {\n                \"static\": [\n                    {\n                        \"prefix\": \"77.1.0.0/16\",\n                        \"config\": {\n                            \"prefix\": \"77.1.0.0/16\"\n                        },\n                        \"next-hops\": {\n                            \"next-hop\": [\n                                {\n                                    \"index\": \"10.0.0.1\",\n                                    \"config\": {\n                                        \"index\": \"10.0.0.1\",\n                                        \"next-hop\": \"10.0.0.1\"\n                                    }\n                                }\n                            ]\n                        }\n                    }\n                ]\n            }\n        }\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4111,6 +4676,19 @@
 				},
 				{
 					"name": "Delete static route",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let routeString = \"77.1.0.0/16\"",
+									"let routeUrl = routeString.replace('/','%2F')",
+									"pm.collectionVariables.set(\"route\", routeUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -4150,7 +4728,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{host}}/restconf/data/network-instances/network-instance/default-vrf/protocols/protocol/STATIC/icx-static/static-routes/static/44.1.0.0%2F16",
+							"raw": "https://{{host}}/restconf/data/network-instances/network-instance/default-vrf/protocols/protocol/STATIC/icx-static/static-routes/static/{{route}}",
 							"protocol": "https",
 							"host": [
 								"{{host}}"
@@ -4167,7 +4745,7 @@
 								"icx-static",
 								"static-routes",
 								"static",
-								"44.1.0.0%2F16"
+								"{{route}}"
 							]
 						}
 					},
@@ -4234,7 +4812,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"let interfaceString = \"1/1/1\"",
+									"let interfaceString = \"1/1/9\"",
 									"let interfaceUrl = interfaceString.replace('/','%2F')",
 									"interfaceUrl = interfaceUrl.replace('/','%2F')",
 									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
@@ -4323,7 +4901,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"vlan\": [\n        {\n            \"vlan-id\": 55,\n            \"config\": {\n                \"vlan-id\": 55,\n                \"name\": \"user-vlan-55\"\n            }\n        }\n    ]\n}",
+							"raw": "{\n    \"vlan\": [\n        {\n            \"vlan-id\": 667,\n            \"config\": {\n                \"vlan-id\": 667,\n                \"name\": \"user-vlan-667\"\n            }\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4355,7 +4933,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"let interfaceString = \"1/1/2\"",
+									"let interfaceString = \"1/1/9\"",
 									"let interfaceUrl = interfaceString.replace('/','%2F')",
 									"interfaceUrl = interfaceUrl.replace('/','%2F')",
 									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
@@ -4395,7 +4973,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"ethernet\": {\n        \"openconfig-vlan:switched-vlan\": {\n            \"config\": {\n                \"trunk-vlans\": [\n                    55\n                ]\n            }\n        }\n    }\n}",
+							"raw": "{\n    \"ethernet\": {\n        \"openconfig-vlan:switched-vlan\": {\n            \"config\": {\n                \"trunk-vlans\": [\n                    666\n                ]\n            }\n        }\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4427,7 +5005,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"let interfaceString = \"1/3/2\"",
+									"let interfaceString = \"1/3/1\"",
 									"let interfaceUrl = interfaceString.replace('/','%2F')",
 									"interfaceUrl = interfaceUrl.replace('/','%2F')",
 									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
@@ -4467,7 +5045,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"ethernet\": {\n        \"openconfig-vlan:switched-vlan\": {\n            \"config\": {\n                \"access-vlan\": 666\n            }\n        }\n    }\n}",
+							"raw": "{\n    \"ethernet\": {\n        \"openconfig-vlan:switched-vlan\": {\n            \"config\": {\n                \"access-vlan\": 55\n            }\n        }\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4499,7 +5077,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"let interfaceString = \"1/3/1\"",
+									"let interfaceString = \"1/1/9\"",
 									"let interfaceUrl = interfaceString.replace('/','%2F')",
 									"interfaceUrl = interfaceUrl.replace('/','%2F')",
 									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
@@ -4547,7 +5125,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{host}}/restconf/data/interfaces/interface/ethernet {{interface}}/ethernet/switched-vlan/config/trunk-vlans/55",
+							"raw": "https://{{host}}/restconf/data/interfaces/interface/ethernet {{interface}}/ethernet/switched-vlan/config/trunk-vlans/666",
 							"protocol": "https",
 							"host": [
 								"{{host}}"
@@ -4562,7 +5140,7 @@
 								"switched-vlan",
 								"config",
 								"trunk-vlans",
-								"55"
+								"666"
 							]
 						}
 					},
@@ -4648,6 +5226,61 @@
 		{
 			"name": "Virtual Interface",
 			"item": [
+				{
+					"name": "Create virtual interface",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"name\": \"ve 66\",\n                \"config\": {\n                    \"name\": \"ve 66\",\n                    \"type\": \"iana-if-type:l3ipvlan\"\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Create virtual interface with IP address",
 					"protocolProfileBehavior": {
@@ -4846,6 +5479,10 @@
 		},
 		{
 			"key": "Password",
+			"value": ""
+		},
+		{
+			"key": "route",
 			"value": ""
 		}
 	]

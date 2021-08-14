@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c8e01455-2af7-4c3d-85a7-e9695a0c7bcf",
+		"_postman_id": "c114a2cb-c864-401d-a2ac-296e4e5491fb",
 		"name": "ICX RESTCONF",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -354,6 +354,69 @@
 					"response": []
 				},
 				{
+					"name": "Get TACACS server",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/aaa/server-groups/server-group/tacacs-default-group/servers/server/55.1.1.1",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"aaa",
+								"server-groups",
+								"server-group",
+								"tacacs-default-group",
+								"servers",
+								"server",
+								"55.1.1.1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Delete TACACS server",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
@@ -587,6 +650,69 @@
 					"response": []
 				},
 				{
+					"name": "Get RADIUS server",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/aaa/server-groups/server-group/radius-default-group/servers/server/77.1.1.1",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"aaa",
+								"server-groups",
+								"server-group",
+								"radius-default-group",
+								"servers",
+								"server",
+								"77.1.1.1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Delete RADIUS server",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
@@ -700,6 +826,63 @@
 								"system",
 								"aaa",
 								"server-groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AAA configuration",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/aaa",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"aaa"
 							]
 						}
 					},
@@ -1228,7 +1411,12 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "AAA - username",
+			"item": [
 				{
 					"name": "Create AAA user",
 					"protocolProfileBehavior": {
@@ -1404,7 +1592,7 @@
 					"response": []
 				},
 				{
-					"name": "Get AAA users",
+					"name": "Get all AAA users",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true,
 						"disabledSystemHeaders": {
@@ -1457,6 +1645,67 @@
 								"aaa",
 								"authentication",
 								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AAA user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/aaa/authentication/users/user/admin",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"aaa",
+								"authentication",
+								"users",
+								"user",
+								"admin"
 							]
 						}
 					},
@@ -1528,7 +1777,7 @@
 			"name": "ACL",
 			"item": [
 				{
-					"name": "Create IPv4 Extended ACL",
+					"name": "Create IPv4 standard ACL",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -1560,7 +1809,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"acl-set\": [\n        {\n            \"name\": \"ext_acl1\",\n            \"type\": \"ACL_IPV4\",\n            \"config\": {\n                \"name\": \"ext_acl1\",\n                \"type\": \"ACL_IPV4\"\n            },\n            \"acl-entries\": {\n                \"acl-entry\": [\n                    {\n                        \"sequence-id\": 10,\n                        \"config\": {\n                            \"sequence-id\": 10\n                        },\n                        \"ipv4\": {\n                            \"config\": {\n                                \"source-address\": \"0.0.0.0\",\n                                \"destination-address\": \"0.0.0.0\",\n                                \"dscp\": 0,\n                                \"protocol\": 6\n                            }\n                        },\n                        \"transport\": {\n                            \"config\": {\n                                \"source-port\": \"0\",\n                                \"destination-port\": \"0\"\n                            }\n                        },\n                        \"actions\": {\n                            \"config\": {\n                                \"forwarding-action\": \"openconfig-acl:ACCEPT\"\n                            }\n                        }\n                    }\n                ]\n            }\n        }\n    ]\n}",
+							"raw": "{\n    \"acl-set\": [\n        {\n            \"name\": \"std_acl\",\n            \"type\": \"ACL_IPV4\",\n            \"config\": {\n                \"name\": \"std_acl\",\n                \"type\": \"ACL_IPV4\"\n            },\n            \"acl-entries\": {\n                \"acl-entry\": [\n                    {\n                        \"sequence-id\": 10,\n                        \"config\": {\n                            \"sequence-id\": 10\n                        },\n                        \"ipv4\": {\n                            \"config\": {\n                                \"source-address\": \"10.157.29.12\",\n                                \"destination-address\": \"0.0.0.0\",\n                                \"dscp\": 0,\n                                \"protocol\": 0\n                            }\n                        },\n                        \"actions\": {\n                            \"config\": {\n                                \"forwarding-action\": \"openconfig-acl:DROP\"\n                            }\n                        }\n                    },\n                    {\n                        \"sequence-id\": 20,\n                        \"config\": {\n                            \"sequence-id\": 20\n                        },\n                        \"ipv4\": {\n                            \"config\": {\n                                \"source-address\": \"0.0.0.0\",\n                                \"destination-address\": \"0.0.0.0\",\n                                \"dscp\": 0,\n                                \"protocol\": 0\n                            }\n                        },\n                        \"transport\": {\n                            \"config\": {\n                                \"source-port\": \"0\",\n                                \"destination-port\": \"0\"\n                            }\n                        },\n                        \"actions\": {\n                            \"config\": {\n                                \"forwarding-action\": \"openconfig-acl:ACCEPT\"\n                            }\n                        }\n                    }\n                ]\n            }\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1584,7 +1833,473 @@
 					"response": []
 				},
 				{
-					"name": "Update IPv4 Extended ACL",
+					"name": "Update IPv4 standard ACL",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"acl-sets\": {\n        \"acl-set\": [\n            {\n                \"name\": \"std_acl\",\n                \"type\": \"ACL_IPV4\",\n                \"config\": {\n                    \"name\": \"std_acl\",\n                    \"type\": \"ACL_IPV4\"\n                },\n                \"acl-entries\": {\n                    \"acl-entry\": [\n                        {\n                            \"sequence-id\": 30,\n                            \"config\": {\n                                \"sequence-id\": 30\n                            },\n                            \"ipv4\": {\n                                \"config\": {\n                                    \"source-address\": \"25.15.11.12\",\n                                    \"destination-address\": \"0.0.0.0\",\n                                    \"dscp\": 0,\n                                    \"protocol\": 0\n                                }\n                            },\n                            \"actions\": {\n                                \"config\": {\n                                    \"forwarding-action\": \"openconfig-acl:DROP\"\n                                }\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/acl-sets",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"acl-sets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get IPv4 standard ACL",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/acl-sets/acl-set/std_acl/ACL_IPV4",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"acl-sets",
+								"acl-set",
+								"std_acl",
+								"ACL_IPV4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete IPv4 standard ACL",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/acl-sets/acl-set/std_acl/ACL_IPV4",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"acl-sets",
+								"acl-set",
+								"std_acl",
+								"ACL_IPV4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply IPv4 standard ACL (ingress & egress)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"id\": \"ethernet 1/1/10\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/10\"\n                },\n                \"ingress-acl-sets\": {\n                    \"ingress-acl-set\": [\n                        {\n                            \"set-name\": \"std_acl\",\n                            \"type\": \"ACL_IPV4\",\n                            \"config\": {\n                                \"set-name\": \"std_acl\",\n                                \"type\": \"ACL_IPV4\"\n                            }\n                        }\n                    ]\n                }\n            },\n            {\n                \"id\": \"ethernet 1/1/11\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/11\"\n                },\n                \"egress-acl-sets\": {\n                    \"egress-acl-set\": [\n                        {\n                            \"set-name\": \"std_acl\",\n                            \"type\": \"ACL_IPV4\",\n                            \"config\": {\n                                \"set-name\": \"std_acl\",\n                                \"type\": \"ACL_IPV4\"\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply IPv4 standard ACL (ingress & egress)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"id\": \"ethernet 1/1/10\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/10\"\n                },\n                \"ingress-acl-sets\": {\n                    \"ingress-acl-set\": [\n                        {\n                            \"set-name\": \"ext_acl1\",\n                            \"type\": \"ACL_IPV4\",\n                            \"config\": {\n                                \"set-name\": \"ext_acl1\",\n                                \"type\": \"ACL_IPV4\"\n                            }\n                        }\n                    ]\n                }\n            },\n            {\n                \"id\": \"ethernet 1/1/10\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/10\"\n                },\n                \"egress-acl-sets\": {\n                    \"egress-acl-set\": [\n                        {\n                            \"set-name\": \"ext_acl1\",\n                            \"type\": \"ACL_IPV4\",\n                            \"config\": {\n                                \"set-name\": \"ext_acl1\",\n                                \"type\": \"ACL_IPV4\"\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/interfaces",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unbind ingress IPv4 standard ACL",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/10\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/interfaces/interface/ethernet {{interface}}/ingress-acl-sets/ingress-acl-set/std_acl/ACL_IPV4",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"interfaces",
+								"interface",
+								"ethernet {{interface}}",
+								"ingress-acl-sets",
+								"ingress-acl-set",
+								"std_acl",
+								"ACL_IPV4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unbind egress IPv4 standard ACL",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/11\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/interfaces/interface/ethernet {{interface}}/egress-acl-sets/egress-acl-set/std_acl/ACL_IPV4",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"interfaces",
+								"interface",
+								"ethernet {{interface}}",
+								"egress-acl-sets",
+								"egress-acl-set",
+								"std_acl",
+								"ACL_IPV4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create IPv4 extended ACL",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"acl-set\": [\n        {\n            \"name\": \"ext_acl\",\n            \"type\": \"ACL_IPV4\",\n            \"config\": {\n                \"name\": \"ext_acl\",\n                \"type\": \"ACL_IPV4\"\n            },\n            \"acl-entries\": {\n                \"acl-entry\": [\n                    {\n                        \"sequence-id\": 10,\n                        \"config\": {\n                            \"sequence-id\": 10\n                        },\n                        \"ipv4\": {\n                            \"config\": {\n                                \"source-address\": \"0.0.0.0\",\n                                \"destination-address\": \"0.0.0.0\",\n                                \"dscp\": 0,\n                                \"protocol\": 6\n                            }\n                        },\n                        \"transport\": {\n                            \"config\": {\n                                \"source-port\": \"0\",\n                                \"destination-port\": \"0\"\n                            }\n                        },\n                        \"actions\": {\n                            \"config\": {\n                                \"forwarding-action\": \"openconfig-acl:ACCEPT\"\n                            }\n                        }\n                    }\n                ]\n            }\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/acl-sets",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"acl-sets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update IPv4 extended ACL",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -1640,7 +2355,57 @@
 					"response": []
 				},
 				{
-					"name": "Delete IPv4 Extended ACL",
+					"name": "Get IPv4 extended ACL",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/acl-sets/acl-set/ext_acl/ACL_IPV4",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"acl-sets",
+								"acl-set",
+								"ext_acl",
+								"ACL_IPV4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete IPv4 extended ACL",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -1680,7 +2445,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{host}}/restconf/data/acl/acl-sets/acl-set/ext_100/ACL_IPV4",
+							"raw": "https://{{host}}/restconf/data/acl/acl-sets/acl-set/ext_acl1/ACL_IPV4",
 							"protocol": "https",
 							"host": [
 								"{{host}}"
@@ -1691,7 +2456,252 @@
 								"acl",
 								"acl-sets",
 								"acl-set",
-								"ext_100",
+								"ext_acl1",
+								"ACL_IPV4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply IPv4 extended ACL (ingress & egress)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"id\": \"ethernet 1/1/10\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/10\"\n                },\n                \"ingress-acl-sets\": {\n                    \"ingress-acl-set\": [\n                        {\n                            \"set-name\": \"ext_acl1\",\n                            \"type\": \"ACL_IPV4\",\n                            \"config\": {\n                                \"set-name\": \"ext_acl1\",\n                                \"type\": \"ACL_IPV4\"\n                            }\n                        }\n                    ]\n                }\n            },\n            {\n                \"id\": \"ethernet 1/1/11\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/11\"\n                },\n                \"egress-acl-sets\": {\n                    \"egress-acl-set\": [\n                        {\n                            \"set-name\": \"ext_acl1\",\n                            \"type\": \"ACL_IPV4\",\n                            \"config\": {\n                                \"set-name\": \"ext_acl1\",\n                                \"type\": \"ACL_IPV4\"\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply IPv4 extended ACL (ingress & egress)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"id\": \"ethernet 1/1/10\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/10\"\n                },\n                \"ingress-acl-sets\": {\n                    \"ingress-acl-set\": [\n                        {\n                            \"set-name\": \"ext_acl1\",\n                            \"type\": \"ACL_IPV4\",\n                            \"config\": {\n                                \"set-name\": \"ext_acl1\",\n                                \"type\": \"ACL_IPV4\"\n                            }\n                        }\n                    ]\n                }\n            },\n            {\n                \"id\": \"ethernet 1/1/10\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/10\"\n                },\n                \"egress-acl-sets\": {\n                    \"egress-acl-set\": [\n                        {\n                            \"set-name\": \"ext_acl1\",\n                            \"type\": \"ACL_IPV4\",\n                            \"config\": {\n                                \"set-name\": \"ext_acl1\",\n                                \"type\": \"ACL_IPV4\"\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/interfaces",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unbind ingress IPv4 extended ACL",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/10\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/interfaces/interface/ethernet {{interface}}/ingress-acl-sets/ingress-acl-set/ext_acl1/ACL_IPV4",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"interfaces",
+								"interface",
+								"ethernet {{interface}}",
+								"ingress-acl-sets",
+								"ingress-acl-set",
+								"ext_acl1",
+								"ACL_IPV4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unbind egress IPv4 extended ACL",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/11\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/interfaces/interface/ethernet {{interface}}/egress-acl-sets/egress-acl-set/ext_acl1/ACL_IPV4",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"interfaces",
+								"interface",
+								"ethernet {{interface}}",
+								"egress-acl-sets",
+								"egress-acl-set",
+								"ext_acl1",
 								"ACL_IPV4"
 							]
 						}
@@ -1731,7 +2741,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"acl-set\": [\n        {\n            \"name\": \"mac_acl1\",\n            \"type\": \"ACL_L2\",\n            \"config\": {\n                \"name\": \"mac_acl1\",\n                \"type\": \"ACL_L2\"\n            },\n            \"acl-entries\": {\n                \"acl-entry\": [\n                    {\n                        \"sequence-id\": 100,\n                        \"config\": {\n                            \"sequence-id\": 100\n                        },\n                        \"l2\": {\n                            \"config\": {\n                                \"source-mac\": \"1111.2222.3333\",\n                                \"source-mac-mask\": \"1111.2222.3333\",\n                                \"destination-mac\": \"1111.2222.3333\",\n                                \"destination-mac-mask\": \"1111.2222.3333\",\n                                \"ethertype\": 2048\n                            }\n                        },\n                        \"actions\": {\n                            \"config\": {\n                                \"forwarding-action\": \"ACCEPT\"\n                            }\n                        }\n                    }\n                ]\n            }\n        }\n    ]\n}",
+							"raw": "{\n    \"acl-set\": [\n        {\n            \"name\": \"mac_acl\",\n            \"type\": \"ACL_L2\",\n            \"config\": {\n                \"name\": \"mac_acl\",\n                \"type\": \"ACL_L2\"\n            },\n            \"acl-entries\": {\n                \"acl-entry\": [\n                    {\n                        \"sequence-id\": 100,\n                        \"config\": {\n                            \"sequence-id\": 100\n                        },\n                        \"l2\": {\n                            \"config\": {\n                                \"source-mac\": \"1111.2222.3333\",\n                                \"source-mac-mask\": \"1111.2222.3333\",\n                                \"destination-mac\": \"1111.2222.3333\",\n                                \"destination-mac-mask\": \"1111.2222.3333\",\n                                \"ethertype\": 2048\n                            }\n                        },\n                        \"actions\": {\n                            \"config\": {\n                                \"forwarding-action\": \"ACCEPT\"\n                            }\n                        }\n                    }\n                ]\n            }\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1811,6 +2821,56 @@
 					"response": []
 				},
 				{
+					"name": "Get MAC ACL",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/acl-sets/acl-set/mac_acl/ACL_L2",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"acl-sets",
+								"acl-set",
+								"mac_acl",
+								"ACL_L2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Delete MAC ACL",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
@@ -1870,7 +2930,651 @@
 					"response": []
 				},
 				{
-					"name": "Get ACLs",
+					"name": "Apply ingress MAC ACL",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"id\": \"ethernet 1/1/10\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/10\"\n                },\n                \"ingress-acl-sets\": {\n                    \"ingress-acl-set\": [\n                        {\n                            \"set-name\": \"mac_acl\",\n                            \"type\": \"ACL_L2\",\n                            \"config\": {\n                                \"set-name\": \"mac_acl\",\n                                \"type\": \"ACL_L2\"\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply ingress MAC ACL",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"id\": \"ethernet 1/1/10\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/10\"\n                },\n                \"ingress-acl-sets\": {\n                    \"ingress-acl-set\": [\n                        {\n                            \"set-name\": \"mac_acl\",\n                            \"type\": \"ACL_L2\",\n                            \"config\": {\n                                \"set-name\": \"mac_acl\",\n                                \"type\": \"ACL_L2\"\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/interfaces",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unbind ingress MAC ACL",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/10\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/interfaces/interface/ethernet {{interface}}/ingress-acl-sets/ingress-acl-set/mac_acl/ACL_L2",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"interfaces",
+								"interface",
+								"ethernet {{interface}}",
+								"ingress-acl-sets",
+								"ingress-acl-set",
+								"mac_acl",
+								"ACL_L2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create IPv6 ACL",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"acl-set\": [\n        {\n            \"name\": \"ipv6_acl\",\n            \"type\": \"ACL_IPV6\",\n            \"config\": {\n                \"name\": \"ipv6_acl\",\n                \"type\": \"ACL_IPV6\"\n            },\n            \"acl-entries\": {\n                \"acl-entry\": [\n                    {\n                        \"sequence-id\": 10,\n                        \"config\": {\n                            \"sequence-id\": 10\n                        },\n                        \"ipv6\": {\n                            \"config\": {\n                                \"source-address\": \"2020::10/120\",\n                                \"destination-address\": \"1020::10/100\",\n                                \"dscp\": 0,\n                                \"protocol\": \"IP_TCP\"\n                            }\n                        },\n                        \"actions\": {\n                            \"config\": {\n                                \"forwarding-action\": \"ACCEPT\"\n                            }\n                        }\n                    }\n                ]\n            }\n        }\n    ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/acl-sets",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"acl-sets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update IPv6 ACL",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"acl-sets\": {\n        \"acl-set\": [\n            {\n                \"name\": \"acl2_ipv6\",\n                \"type\": \"ACL_IPV6\",\n                \"config\": {\n                    \"name\": \"acl2_ipv6\",\n                    \"type\": \"ACL_IPV6\"\n                },\n                \"acl-entries\": {\n                    \"acl-entry\": [\n                        {\n                            \"sequence-id\": 10,\n                            \"config\": {\n                                \"sequence-id\": 10\n                            },\n                            \"ipv6\": {\n                                \"config\": {\n                                    \"source-address\": \"1100::10/120\",\n                                    \"destination-address\": \"2200::10/100\",\n                                    \"dscp\": 0,\n                                    \"protocol\": \"IP_TCP\"\n                                }\n                            },\n                            \"actions\": {\n                                \"config\": {\n                                    \"forwarding-action\": \"ACCEPT\"\n                                }\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/acl-sets",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"acl-sets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get IPv6 ACL",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/acl-sets/acl-set/acl_ipv6/ACL_IPV6",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"acl-sets",
+								"acl-set",
+								"acl_ipv6",
+								"ACL_IPV6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete IPv6 ACL",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/acl-sets/acl-set/acl_ipv6/ACL_IPV6",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"acl-sets",
+								"acl-set",
+								"acl_ipv6",
+								"ACL_IPV6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply IPv6 ACL (ingress & egress)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"id\": \"ethernet 1/1/10\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/10\"\n                },\n                \"ingress-acl-sets\": {\n                    \"ingress-acl-set\": [\n                        {\n                            \"set-name\": \"acl_ipv6\",\n                            \"type\": \"ACL_IPV6\",\n                            \"config\": {\n                                \"set-name\": \"acl_ipv6\",\n                                \"type\": \"ACL_IPV6\"\n                            }\n                        }\n                    ]\n                }\n            },\n            {\n                \"id\": \"ethernet 1/1/11\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/11\"\n                },\n                \"egress-acl-sets\": {\n                    \"egress-acl-set\": [\n                        {\n                            \"set-name\": \"acl_ipv6\",\n                            \"type\": \"ACL_IPV6\",\n                            \"config\": {\n                                \"set-name\": \"acl_ipv6\",\n                                \"type\": \"ACL_IPV6\"\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply IPv6 ACL (ingress & egress)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"id\": \"ethernet 1/1/8\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/8\"\n                },\n                \"ingress-acl-sets\": {\n                    \"ingress-acl-set\": [\n                        {\n                            \"set-name\": \"acl_ipv6\",\n                            \"type\": \"ACL_IPV6\",\n                            \"config\": {\n                                \"set-name\": \"acl_ipv6\",\n                                \"type\": \"ACL_IPV6\"\n                            }\n                        }\n                    ]\n                }\n            },\n            {\n                \"id\": \"ethernet 1/1/9\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/9\"\n                },\n                \"egress-acl-sets\": {\n                    \"egress-acl-set\": [\n                        {\n                            \"set-name\": \"acl_ipv6\",\n                            \"type\": \"ACL_IPV6\",\n                            \"config\": {\n                                \"set-name\": \"acl_ipv6\",\n                                \"type\": \"ACL_IPV6\"\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/interfaces",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unbind ingress IPv6 ACL",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/8\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/interfaces/interface/ethernet {{interface}}/ingress-acl-sets/ingress-acl-set/acl_ipv6/ACL_IPV6",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"interfaces",
+								"interface",
+								"ethernet {{interface}}",
+								"ingress-acl-sets",
+								"ingress-acl-set",
+								"acl_ipv6",
+								"ACL_IPV6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unbind egress IPv6 ACL",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/11\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/interfaces/interface/ethernet {{interface}}/egress-acl-sets/egress-acl-set/acl_ipv6/ACL_IPV6",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"interfaces",
+								"interface",
+								"ethernet {{interface}}",
+								"egress-acl-sets",
+								"egress-acl-set",
+								"acl_ipv6",
+								"ACL_IPV6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all ACLs",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -1917,318 +3621,7 @@
 					"response": []
 				},
 				{
-					"name": "Apply IPv4 ACL to interfaces (ingress & egress)",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "ruckus123!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"id\": \"ethernet 1/1/10\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/10\"\n                },\n                \"ingress-acl-sets\": {\n                    \"ingress-acl-set\": [\n                        {\n                            \"set-name\": \"ext_acl1\",\n                            \"type\": \"ACL_IPV4\",\n                            \"config\": {\n                                \"set-name\": \"ext_acl1\",\n                                \"type\": \"ACL_IPV4\"\n                            }\n                        }\n                    ]\n                }\n            },\n            {\n                \"id\": \"ethernet 1/1/11\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/11\"\n                },\n                \"egress-acl-sets\": {\n                    \"egress-acl-set\": [\n                        {\n                            \"set-name\": \"ext_acl1\",\n                            \"type\": \"ACL_IPV4\",\n                            \"config\": {\n                                \"set-name\": \"ext_acl1\",\n                                \"type\": \"ACL_IPV4\"\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{host}}/restconf/data/acl",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"acl"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete ingress IPv4 ACL interface binding",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"let interfaceString = \"1/1/10\"",
-									"let interfaceUrl = interfaceString.replace('/','%2F')",
-									"interfaceUrl = interfaceUrl.replace('/','%2F')",
-									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "ruckus123!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{host}}/restconf/data/acl/interfaces/interface/ethernet {{interface}}/ingress-acl-sets/ingress-acl-set/ext_acl1/ACL_IPV4",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"acl",
-								"interfaces",
-								"interface",
-								"ethernet {{interface}}",
-								"ingress-acl-sets",
-								"ingress-acl-set",
-								"ext_acl1",
-								"ACL_IPV4"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete egress IPv4 ACL interface binding",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"let interfaceString = \"1/1/11\"",
-									"let interfaceUrl = interfaceString.replace('/','%2F')",
-									"interfaceUrl = interfaceUrl.replace('/','%2F')",
-									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "ruckus123!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{host}}/restconf/data/acl/interfaces/interface/ethernet {{interface}}/egress-acl-sets/egress-acl-set/ext_acl1/ACL_IPV4",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"acl",
-								"interfaces",
-								"interface",
-								"ethernet {{interface}}",
-								"egress-acl-sets",
-								"egress-acl-set",
-								"ext_acl1",
-								"ACL_IPV4"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Apply MAC ACL to interfaces (ingress)",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "ruckus123!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"id\": \"ethernet 1/1/10\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/10\"\n                },\n                \"ingress-acl-sets\": {\n                    \"ingress-acl-set\": [\n                        {\n                            \"set-name\": \"mac_acl1\",\n                            \"type\": \"ACL_L2\",\n                            \"config\": {\n                                \"set-name\": \"mac_acl1\",\n                                \"type\": \"ACL_L2\"\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{host}}/restconf/data/acl",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"acl"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete ingress MAC ACL interface binding",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"let interfaceString = \"1/1/10\"",
-									"let interfaceUrl = interfaceString.replace('/','%2F')",
-									"interfaceUrl = interfaceUrl.replace('/','%2F')",
-									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "ruckus123!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{host}}/restconf/data/acl/interfaces/interface/ethernet {{interface}}/ingress-acl-sets/ingress-acl-set/mac_acl1/ACL_L2",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"acl",
-								"interfaces",
-								"interface",
-								"ethernet {{interface}}",
-								"ingress-acl-sets",
-								"ingress-acl-set",
-								"mac_acl1",
-								"ACL_L2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get ACL interface bindings",
+					"name": "Get all ACL bindings",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -2269,6 +3662,69 @@
 								"data",
 								"acl",
 								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ACL binding",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/10\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/interfaces/interface/ethernet {{interface}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"interfaces",
+								"interface",
+								"ethernet {{interface}}"
 							]
 						}
 					},
@@ -2331,122 +3787,6 @@
 								"system",
 								"dns",
 								"servers"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete dns server",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "ruckus123!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{host}}/restconf/data/system/dns/servers/server/8.8.4.4",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"system",
-								"dns",
-								"servers",
-								"server",
-								"8.8.4.4"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get dns servers",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true,
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "ruckus123!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{host}}/restconf/data/system/dns",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"system",
-								"dns"
 							]
 						}
 					},
@@ -2565,6 +3905,239 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get dns server",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/dns/servers/server/8.8.4.4",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"dns",
+								"servers",
+								"server",
+								"8.8.4.4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all dns servers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/dns",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"dns"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete dns server",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/dns/servers/server/8.8.4.4",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"dns",
+								"servers",
+								"server",
+								"8.8.4.4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all dns servers",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/system/dns/servers",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"system",
+								"dns",
+								"servers"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -2572,7 +4145,7 @@
 			"name": "Interface",
 			"item": [
 				{
-					"name": "Get interfaces",
+					"name": "Get all interfaces",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -2612,6 +4185,67 @@
 								"restconf",
 								"data",
 								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get interface",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/1\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces/interface=ethernet {{interface}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces",
+								"interface=ethernet {{interface}}"
 							]
 						}
 					},
@@ -2722,67 +4356,6 @@
 								"restconf",
 								"data",
 								"interfaces"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get interface",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"let interfaceString = \"1/1/1\"",
-									"let interfaceUrl = interfaceString.replace('/','%2F')",
-									"interfaceUrl = interfaceUrl.replace('/','%2F')",
-									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "ruckus123!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{host}}/restconf/data/interfaces/interface=ethernet {{interface}}",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"interfaces",
-								"interface=ethernet {{interface}}"
 							]
 						}
 					},
@@ -2988,6 +4561,147 @@
 					"response": []
 				},
 				{
+					"name": "Update port speed",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/12\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"config\": {\n        \"auto-negotiate\": false,\n        \"duplex-mode\": \"FULL\",\n        \"port-speed\": \"openconfig-if-ethernet:SPEED_10GB\",\n        \"icx-openconfig-if-ethernet-aug:ethernet-clock\": \"slave\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces/interface/ethernet {{interface}}/ethernet/config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces",
+								"interface",
+								"ethernet {{interface}}",
+								"ethernet",
+								"config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get interface IP address",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/12\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces/interface/ethernet {{interface}}/subinterfaces/subinterface/0/ipv4/addresses/address",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces",
+								"interface",
+								"ethernet {{interface}}",
+								"subinterfaces",
+								"subinterface",
+								"0",
+								"ipv4",
+								"addresses",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Delete interface IP address",
 					"event": [
 						{
@@ -3064,74 +4778,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Get interface IP address",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"let interfaceString = \"1/1/12\"",
-									"let interfaceUrl = interfaceString.replace('/','%2F')",
-									"interfaceUrl = interfaceUrl.replace('/','%2F')",
-									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "ruckus123!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{host}}/restconf/data/interfaces/interface/ethernet {{interface}}/subinterfaces/subinterface/0/ipv4/addresses/address",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"interfaces",
-								"interface",
-								"ethernet {{interface}}",
-								"subinterfaces",
-								"subinterface",
-								"0",
-								"ipv4",
-								"addresses",
-								"address"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -3194,6 +4840,61 @@
 					"response": []
 				},
 				{
+					"name": "Update dynamic LAG",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"name\": \"lag 7\",\n                \"config\": {\n                    \"name\": \"lag 7\",\n                    \"type\": \"iana-if-type:ieee8023adLag\",\n                    \"enabled\": false\n                },\n                \"openconfig-if-aggregate:aggregation\": {\n                    \"config\": {\n                        \"lag-type\": \"LACP\"\n                    }\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create static LAG",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
@@ -3226,7 +4927,62 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"interface\": [\n        {\n            \"name\": \"lag 7\",\n            \"config\": {\n                \"name\": \"lag 7\",\n                \"type\": \"iana-if-type:ieee8023adLag\",\n                \"enabled\": true\n            },\n            \"openconfig-if-aggregate:aggregation\": {\n                \"config\": {\n                    \"lag-type\": \"STATIC\"\n                }\n            }\n        }\n    ]\n}",
+							"raw": "{\n    \"interface\": [\n        {\n            \"name\": \"lag 8\",\n            \"config\": {\n                \"name\": \"lag 8\",\n                \"type\": \"iana-if-type:ieee8023adLag\",\n                \"enabled\": true\n            },\n            \"openconfig-if-aggregate:aggregation\": {\n                \"config\": {\n                    \"lag-type\": \"STATIC\"\n                }\n            }\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update static LAG",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"name\": \"lag 8\",\n                \"config\": {\n                    \"name\": \"lag 8\",\n                    \"type\": \"iana-if-type:ieee8023adLag\",\n                    \"enabled\": true\n                },\n                \"openconfig-if-aggregate:aggregation\": {\n                    \"config\": {\n                        \"lag-type\": \"STATIC\"\n                    }\n                }\n            }\n        ]\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3716,7 +5472,7 @@
 			"name": "LLDP",
 			"item": [
 				{
-					"name": "Enable LLDP",
+					"name": "Enable global LLDP",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -3772,63 +5528,7 @@
 					"response": []
 				},
 				{
-					"name": "Enable LLDP",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "ruckus123!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"config\": {\n        \"enabled\": true\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{host}}/restconf/data/lldp/config",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"lldp",
-								"config"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Disable LLDP",
+					"name": "Disable global LLDP",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -3884,7 +5584,63 @@
 					"response": []
 				},
 				{
-					"name": "Disable LLDP",
+					"name": "Enable global LLDP",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"config\": {\n        \"enabled\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/lldp/config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"lldp",
+								"config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disable global LLDP",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -3934,6 +5690,118 @@
 								"data",
 								"lldp",
 								"config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enable LLDP interface",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"name\": \"ethernet 1/1/1\",\n                \"config\": {\n                    \"name\": \"ethernet 1/1/1\",\n                    \"enabled\": true\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/lldp/interfaces",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"lldp",
+								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disable LLDP interface",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"name\": \"ethernet 1/1/1\",\n                \"config\": {\n                    \"name\": \"ethernet 1/1/1\",\n                    \"enabled\": true\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/lldp/interfaces",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"lldp",
+								"interfaces"
 							]
 						}
 					},
@@ -4217,7 +6085,7 @@
 					"response": []
 				},
 				{
-					"name": "Get OSPF areas and interface bindings",
+					"name": "Get all OSPF areas and bindings",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -4265,6 +6133,62 @@
 								"icx-ospf",
 								"ospfv2",
 								"areas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get OSPF area",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/network-instances/network-instance/default-vrf/protocols/protocol/OSPF/icx-ospf/ospfv2/areas/area/100",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"network-instances",
+								"network-instance",
+								"default-vrf",
+								"protocols",
+								"protocol",
+								"OSPF",
+								"icx-ospf",
+								"ospfv2",
+								"areas",
+								"area",
+								"100"
 							]
 						}
 					},
@@ -4447,6 +6371,72 @@
 					"response": []
 				},
 				{
+					"name": "Add OSPF area to interface",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"id\": \"ethernet 1/1/3\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/3\"\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/network-instances/network-instance/default-vrf/protocols/protocol/OSPF/icx-ospf/ospfv2/areas/area/100/interfaces",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"network-instances",
+								"network-instance",
+								"default-vrf",
+								"protocols",
+								"protocol",
+								"OSPF",
+								"icx-ospf",
+								"ospfv2",
+								"areas",
+								"area",
+								"100",
+								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Remove OSPF area from interface",
 					"event": [
 						{
@@ -4527,12 +6517,157 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Remove all OSPF area bindings",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/11\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/network-instances/network-instance/default-vrf/protocols/protocol/OSPF/icx-ospf/ospfv2/areas/area/100/interfaces",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"network-instances",
+								"network-instance",
+								"default-vrf",
+								"protocols",
+								"protocol",
+								"OSPF",
+								"icx-ospf",
+								"ospfv2",
+								"areas",
+								"area",
+								"100",
+								"interfaces"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "POE",
 			"item": [
+				{
+					"name": "Get PoE enabled status on interface",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/1\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces/interface=ethernet {{interface}}/ethernet/poe/state/enabled",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces",
+								"interface=ethernet {{interface}}",
+								"ethernet",
+								"poe",
+								"state",
+								"enabled"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Get PoE on all interfaces",
 					"protocolProfileBehavior": {
@@ -4574,6 +6709,69 @@
 								"restconf",
 								"data",
 								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get PoE configured status on interface",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/1\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces/interface=ethernet {{interface}}/ethernet/poe",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces",
+								"interface=ethernet {{interface}}",
+								"ethernet",
+								"poe"
 							]
 						}
 					},
@@ -4638,71 +6836,6 @@
 								"ethernet",
 								"poe",
 								"state"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get PoE enabled status on interface",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"let interfaceString = \"1/1/1\"",
-									"let interfaceUrl = interfaceString.replace('/','%2F')",
-									"interfaceUrl = interfaceUrl.replace('/','%2F')",
-									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "ruckus123!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{host}}/restconf/data/interfaces/interface=ethernet {{interface}}/ethernet/poe/state/enabled",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"interfaces",
-								"interface=ethernet {{interface}}",
-								"ethernet",
-								"poe",
-								"state",
-								"enabled"
 							]
 						}
 					},
@@ -5188,6 +7321,62 @@
 					"response": []
 				},
 				{
+					"name": "Enable RSTP in vlan",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rapid-pvst\": {\n        \"vlan\": [\n            {\n                \"vlan-id\": 77,\n                \"config\": {\n                    \"vlan-id\": 77\n                }\n            }\n        ]\n    }\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/stp/rapid-pvst",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"stp",
+								"rapid-pvst"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get spanning tree status",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
@@ -5458,7 +7647,7 @@
 			"name": "Static Routes",
 			"item": [
 				{
-					"name": "Get static routes",
+					"name": "Get all static routes",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -5504,6 +7693,74 @@
 								"protocol",
 								"STATIC",
 								"icx-static"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get static route",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let routeString = \"99.1.1.0/24\"",
+									"let routeUrl = routeString.replace('/','%2F')",
+									"pm.collectionVariables.set(\"route\", routeUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/network-instances/network-instance/default-vrf/protocols/protocol/STATIC/icx-static/static-routes/static/{{route}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"network-instances",
+								"network-instance",
+								"default-vrf",
+								"protocols",
+								"protocol",
+								"STATIC",
+								"icx-static",
+								"static-routes",
+								"static",
+								"{{route}}"
 							]
 						}
 					},
@@ -5632,7 +7889,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"let routeString = \"77.1.0.0/16\"",
+									"let routeString = \"99.1.1.0/24\"",
 									"let routeUrl = routeString.replace('/','%2F')",
 									"pm.collectionVariables.set(\"route\", routeUrl);"
 								],
@@ -5708,7 +7965,7 @@
 			"name": "VLAN",
 			"item": [
 				{
-					"name": "Get vlans",
+					"name": "Get all vlans",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -5751,6 +8008,57 @@
 								"network-instance",
 								"default-vrf",
 								"vlans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get vlan",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/network-instances/network-instance/default-vrf/vlans/vlan/33",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"network-instances",
+								"network-instance",
+								"default-vrf",
+								"vlans",
+								"vlan",
+								"33"
 							]
 						}
 					},
@@ -5878,6 +8186,207 @@
 					"response": []
 				},
 				{
+					"name": "Create vlans",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vlans\": {\n        \"vlan\": [\n            {\n                \"vlan-id\": 77,\n                \"config\": {\n                    \"vlan-id\": 77,\n                    \"name\": \"sheldon\"\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/network-instances/network-instance/default-vrf/vlans",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"network-instances",
+								"network-instance",
+								"default-vrf",
+								"vlans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete vlan",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/network-instances/network-instance/default-vrf/vlans/vlan/123",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"network-instances",
+								"network-instance",
+								"default-vrf",
+								"vlans",
+								"vlan",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add tagged port to vlans",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/9\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"openconfig-vlan:switched-vlan\": {\n        \"config\": {\n            \"trunk-vlans\": [\n                77,\n                78\n            ]\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces/interface/ethernet {{interface}}/ethernet",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces",
+								"interface",
+								"ethernet {{interface}}",
+								"ethernet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Add tagged port to vlans",
 					"event": [
 						{
@@ -5924,7 +8433,79 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"ethernet\": {\n        \"openconfig-vlan:switched-vlan\": {\n            \"config\": {\n                \"trunk-vlans\": [\n                    666\n                ]\n            }\n        }\n    }\n}",
+							"raw": "{\n    \"ethernet\": {\n        \"openconfig-vlan:switched-vlan\": {\n            \"config\": {\n                \"trunk-vlans\": [\n                    666,\n                    667\n                ]\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces/interface/ethernet {{interface}}/ethernet",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces",
+								"interface",
+								"ethernet {{interface}}",
+								"ethernet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add untagged port to vlans",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/3/1\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"openconfig-vlan:switched-vlan\": {\n        \"config\": {\n            \"access-vlan\": 40\n        }\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -6272,6 +8853,61 @@
 								}
 							]
 						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interface\": [\n        {\n            \"name\": \"ve 77\",\n            \"config\": {\n                \"name\": \"ve 77\",\n                \"type\": \"iana-if-type:l3ipvlan\"\n            }\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create virtual interface",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [
 							{
@@ -6282,7 +8918,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"name\": \"ve 66\",\n                \"config\": {\n                    \"name\": \"ve 66\",\n                    \"type\": \"iana-if-type:l3ipvlan\"\n                }\n            }\n        ]\n    }\n}",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"name\": \"ve 78\",\n                \"config\": {\n                    \"name\": \"ve 78\",\n                    \"type\": \"iana-if-type:l3ipvlan\"\n                }\n            }\n        ]\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -6338,6 +8974,61 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"interface\": [\n        {\n            \"name\": \"ve 55\",\n            \"config\": {\n                \"name\": \"ve 55\",\n                \"type\": \"iana-if-type:l3ipvlan\"\n            },\n            \"openconfig-vlan:routed-vlan\": {\n                \"config\": {\n                    \"vlan\": 55\n                },\n                \"openconfig-if-ip:ipv4\": {\n                    \"addresses\": {\n                        \"address\": [\n                            {\n                                \"ip\": \"55.1.1.1\",\n                                \"config\": {\n                                    \"ip\": \"55.1.1.1\",\n                                    \"prefix-length\": 24\n                                }\n                            }\n                        ]\n                    }\n                }\n            }\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create virtual interface with IP address",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ruckus123!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"name\": \"ve 667\",\n                \"config\": {\n                    \"name\": \"ve 667\",\n                    \"type\": \"iana-if-type:l3ipvlan\"\n                },\n                \"openconfig-vlan:routed-vlan\": {\n                    \"config\": {\n                        \"vlan\": 667\n                    },\n                    \"openconfig-if-ip:ipv4\": {\n                        \"addresses\": {\n                            \"address\": [\n                                {\n                                    \"ip\": \"77.1.1.1\",\n                                    \"config\": {\n                                        \"ip\": \"77.1.1.1\",\n                                        \"prefix-length\": 24\n                                    }\n                                }\n                            ]\n                        }\n                    }\n                }\n            }\n        ]\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"

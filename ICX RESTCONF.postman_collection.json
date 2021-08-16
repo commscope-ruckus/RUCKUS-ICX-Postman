@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c114a2cb-c864-401d-a2ac-296e4e5491fb",
+		"_postman_id": "2edcb87c-5651-414f-8d8f-3decdbb40a02",
 		"name": "ICX RESTCONF",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -17,7 +17,7 @@
 								"exec": [
 									"pm.collectionVariables.set(\"host\", \"10.0.0.213\")",
 									"pm.collectionVariables.set(\"Username\", \"admin\")",
-									"pm.collectionVariables.set(\"Password\", \"ruckus123!\")"
+									"pm.collectionVariables.set(\"Password\", \"password\")"
 								],
 								"type": "text/javascript"
 							}
@@ -66,7 +66,120 @@
 					"response": []
 				},
 				{
+					"name": "Get datastore and data models (JSON)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"host\", \"10.0.0.213\")",
+									"pm.collectionVariables.set(\"Username\", \"admin\")",
+									"pm.collectionVariables.set(\"Password\", \"simone\")"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get top level resources (XML)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get datastore and data models (XML)",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -158,7 +271,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"authentication\": {\n        \"config\": {\n            \"authentication-method\": \"TACACS_ONLY_ALL\"\n        }\n    }\n}",
+							"raw": "{\n    \"authentication\": {\n        \"config\": {\n            \"authentication-method\": \"NONE\"\n        }\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1450,7 +1563,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user\": [\n        {\n            \"username\": \"Sonia\",\n            \"config\": {\n                \"username\": \"Sonia\",\n                \"password\": \"ruckus123!\",\n                \"icx-openconfig-aaa-aug:privilege\": 0\n            }\n        }\n    ]\n}",
+							"raw": "{\n    \"user\": [\n        {\n            \"username\": \"naomi\",\n            \"config\": {\n                \"username\": \"naomi\",\n                \"password\": \"ruckus123!\",\n                \"icx-openconfig-aaa-aug:privilege\": 0\n            }\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1566,7 +1679,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"users\": {\n        \"user\": [\n            {\n                \"username\": \"admin\",\n                \"config\": {\n                    \"username\": \"admin\",\n                    \"password\": \"simone\",\n                    \"icx-openconfig-aaa-aug:privilege\": 0\n                }\n            }\n        ]\n    }\n}",
+							"raw": "{\n    \"users\": {\n        \"user\": [\n            {\n                \"username\": \"dust\",\n                \"config\": {\n                    \"username\": \"dust\",\n                    \"password\": \"simone\",\n                    \"icx-openconfig-aaa-aug:privilege\": 0\n                }\n            }\n        ]\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1692,7 +1805,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{host}}/restconf/data/system/aaa/authentication/users/user/admin",
+							"raw": "https://{{host}}/restconf/data/system/aaa/authentication/users/user/naomi",
 							"protocol": "https",
 							"host": [
 								"{{host}}"
@@ -1705,7 +1818,7 @@
 								"authentication",
 								"users",
 								"user",
-								"admin"
+								"naomi"
 							]
 						}
 					},
@@ -1752,7 +1865,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{host}}/restconf/data/system/aaa/authentication/users/user/Marcelo",
+							"raw": "https://{{host}}/restconf/data/system/aaa/authentication/users/user/naomi",
 							"protocol": "https",
 							"host": [
 								"{{host}}"
@@ -1765,7 +1878,7 @@
 								"authentication",
 								"users",
 								"user",
-								"Marcelo"
+								"naomi"
 							]
 						}
 					},
@@ -1776,6 +1889,163 @@
 		{
 			"name": "ACL",
 			"item": [
+				{
+					"name": "Get all ACLs",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/acl-sets",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"acl-sets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all ACL bindings",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/interfaces",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ACL binding",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let interfaceString = \"1/1/10\"",
+									"let interfaceUrl = interfaceString.replace('/','%2F')",
+									"interfaceUrl = interfaceUrl.replace('/','%2F')",
+									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/acl/interfaces/interface/ethernet {{interface}}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"acl",
+								"interfaces",
+								"interface",
+								"ethernet {{interface}}"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Create IPv4 standard ACL",
 					"protocolProfileBehavior": {
@@ -1789,12 +2059,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -1845,12 +2115,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -1901,12 +2171,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -1951,12 +2221,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2010,12 +2280,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2065,12 +2335,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2135,12 +2405,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2202,12 +2472,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2255,12 +2525,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2311,12 +2581,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2367,12 +2637,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2417,12 +2687,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2476,12 +2746,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2496,7 +2766,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"id\": \"ethernet 1/1/10\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/10\"\n                },\n                \"ingress-acl-sets\": {\n                    \"ingress-acl-set\": [\n                        {\n                            \"set-name\": \"ext_acl1\",\n                            \"type\": \"ACL_IPV4\",\n                            \"config\": {\n                                \"set-name\": \"ext_acl1\",\n                                \"type\": \"ACL_IPV4\"\n                            }\n                        }\n                    ]\n                }\n            },\n            {\n                \"id\": \"ethernet 1/1/11\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/11\"\n                },\n                \"egress-acl-sets\": {\n                    \"egress-acl-set\": [\n                        {\n                            \"set-name\": \"ext_acl1\",\n                            \"type\": \"ACL_IPV4\",\n                            \"config\": {\n                                \"set-name\": \"ext_acl1\",\n                                \"type\": \"ACL_IPV4\"\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"id\": \"ethernet 1/1/12\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/12\"\n                },\n                \"ingress-acl-sets\": {\n                    \"ingress-acl-set\": [\n                        {\n                            \"set-name\": \"ext_acl\",\n                            \"type\": \"ACL_IPV4\",\n                            \"config\": {\n                                \"set-name\": \"ext_acl\",\n                                \"type\": \"ACL_IPV4\"\n                            }\n                        }\n                    ]\n                }\n            },\n            {\n                \"id\": \"ethernet 1/1/9\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/9\"\n                },\n                \"egress-acl-sets\": {\n                    \"egress-acl-set\": [\n                        {\n                            \"set-name\": \"ext_acl\",\n                            \"type\": \"ACL_IPV4\",\n                            \"config\": {\n                                \"set-name\": \"ext_acl\",\n                                \"type\": \"ACL_IPV4\"\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2531,12 +2801,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2601,12 +2871,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2668,12 +2938,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2721,12 +2991,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2777,12 +3047,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2833,12 +3103,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2883,12 +3153,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2942,12 +3212,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -2997,12 +3267,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -3067,12 +3337,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -3120,12 +3390,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -3176,12 +3446,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -3232,12 +3502,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -3282,12 +3552,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -3341,12 +3611,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -3361,7 +3631,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"id\": \"ethernet 1/1/10\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/10\"\n                },\n                \"ingress-acl-sets\": {\n                    \"ingress-acl-set\": [\n                        {\n                            \"set-name\": \"acl_ipv6\",\n                            \"type\": \"ACL_IPV6\",\n                            \"config\": {\n                                \"set-name\": \"acl_ipv6\",\n                                \"type\": \"ACL_IPV6\"\n                            }\n                        }\n                    ]\n                }\n            },\n            {\n                \"id\": \"ethernet 1/1/11\",\n                \"config\": {\n                    \"id\": \"ethernet 1/1/11\"\n                },\n                \"egress-acl-sets\": {\n                    \"egress-acl-set\": [\n                        {\n                            \"set-name\": \"acl_ipv6\",\n                            \"type\": \"ACL_IPV6\",\n                            \"config\": {\n                                \"set-name\": \"acl_ipv6\",\n                                \"type\": \"ACL_IPV6\"\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+							"raw": "{\n    \"interfaces\": {\n        \"interface\": [\n            {\n                \"id\": \"ethernet 1/2/1\",\n                \"config\": {\n                    \"id\": \"ethernet 1/2/1\"\n                },\n                \"ingress-acl-sets\": {\n                    \"ingress-acl-set\": [\n                        {\n                            \"set-name\": \"ipv6_acl\",\n                            \"type\": \"ACL_IPV6\",\n                            \"config\": {\n                                \"set-name\": \"ipv6_acl\",\n                                \"type\": \"ACL_IPV6\"\n                            }\n                        }\n                    ]\n                }\n            },\n            {\n                \"id\": \"ethernet 1/2/2\",\n                \"config\": {\n                    \"id\": \"ethernet 1/2/2\"\n                },\n                \"egress-acl-sets\": {\n                    \"egress-acl-set\": [\n                        {\n                            \"set-name\": \"ipv6_acl\",\n                            \"type\": \"ACL_IPV6\",\n                            \"config\": {\n                                \"set-name\": \"ipv6_acl\",\n                                \"type\": \"ACL_IPV6\"\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3396,12 +3666,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -3466,12 +3736,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -3533,12 +3803,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -3572,163 +3842,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Get all ACLs",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "ruckus123!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{host}}/restconf/data/acl/acl-sets",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"acl",
-								"acl-sets"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get all ACL bindings",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "ruckus123!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{host}}/restconf/data/acl/interfaces",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"acl",
-								"interfaces"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get ACL binding",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"let interfaceString = \"1/1/10\"",
-									"let interfaceUrl = interfaceString.replace('/','%2F')",
-									"interfaceUrl = interfaceUrl.replace('/','%2F')",
-									"pm.collectionVariables.set(\"interface\", interfaceUrl);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "ruckus123!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{host}}/restconf/data/acl/interfaces/interface/ethernet {{interface}}",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"acl",
-								"interfaces",
-								"interface",
-								"ethernet {{interface}}"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -3748,12 +3861,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -3805,12 +3918,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -3862,12 +3975,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -3920,12 +4033,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -3980,12 +4093,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -4036,12 +4149,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -4095,12 +4208,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -4157,12 +4270,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -4217,12 +4330,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -4264,12 +4377,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -4319,12 +4432,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -4374,12 +4487,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -4443,12 +4556,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -4515,12 +4628,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -4535,7 +4648,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"subinterfaces\": {\n        \"subinterface\": [\n            {\n                \"index\": 0,\n                \"config\": {\n                    \"index\": 0\n                },\n                \"openconfig-if-ip:ipv4\": {\n                    \"addresses\": {\n                        \"address\": [\n                            {\n                                \"ip\": \"37.1.1.1\",\n                                \"config\": {\n                                    \"ip\": \"37.1.1.1\",\n                                    \"prefix-length\": 25\n                                }\n                            }\n                        ]\n                    }\n                }\n            }\n        ]\n    }\n}",
+							"raw": "{\n    \"subinterfaces\": {\n        \"subinterface\": [\n            {\n                \"index\": 0,\n                \"config\": {\n                    \"index\": 0\n                },\n                \"openconfig-if-ip:ipv4\": {\n                    \"addresses\": {\n                        \"address\": [\n                            {\n                                \"ip\": \"50.0.0.1\",\n                                \"config\": {\n                                    \"ip\": \"50.0.0.1\",\n                                    \"prefix-length\": 25\n                                }\n                            }\n                        ]\n                    }\n                }\n            }\n        ]\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4587,12 +4700,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -4660,12 +4773,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -4728,12 +4841,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -4756,7 +4869,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{host}}/restconf/data/interfaces/interface/ethernet {{interface}}/subinterfaces/subinterface/0/ipv4/addresses/address/30.0.0.1",
+							"raw": "https://{{host}}/restconf/data/interfaces/interface/ethernet {{interface}}/subinterfaces/subinterface/0/ipv4/addresses/address/40.0.0.1",
 							"protocol": "https",
 							"host": [
 								"{{host}}"
@@ -4773,7 +4886,7 @@
 								"ipv4",
 								"addresses",
 								"address",
-								"30.0.0.1"
+								"40.0.0.1"
 							]
 						}
 					},
@@ -4797,12 +4910,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -4817,7 +4930,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"interface\": [\n        {\n            \"name\": \"lag\",\n            \"config\": {\n                \"name\": \"lag\",\n                \"type\": \"iana-if-type:ieee8023adLag\",\n                \"enabled\": true\n            },\n            \"openconfig-if-aggregate:aggregation\": {\n                \"config\": {\n                    \"lag-type\": \"LACP\"\n                }\n            }\n        }\n    ]\n}",
+							"raw": "{\n    \"interface\": [\n        {\n            \"name\": \"lag 15\",\n            \"config\": {\n                \"name\": \"lag 15\",\n                \"type\": \"iana-if-type:ieee8023adLag\",\n                \"enabled\": true\n            },\n            \"openconfig-if-aggregate:aggregation\": {\n                \"config\": {\n                    \"lag-type\": \"LACP\"\n                }\n            }\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4852,12 +4965,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -4907,12 +5020,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -4962,12 +5075,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -5018,12 +5131,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -5085,12 +5198,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -5141,12 +5254,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -5212,12 +5325,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -5285,12 +5398,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -5360,12 +5473,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -5420,12 +5533,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -5484,12 +5597,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -5540,12 +5653,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -5596,12 +5709,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -5652,12 +5765,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -5708,12 +5821,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -5764,12 +5877,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -5820,12 +5933,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -5867,12 +5980,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -5928,12 +6041,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -5981,12 +6094,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -6039,12 +6152,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -6097,12 +6210,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -6151,12 +6264,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -6207,12 +6320,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -6263,12 +6376,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -6317,12 +6430,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -6337,7 +6450,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"interface\": [\n        {\n            \"id\": \"ethernet 1/1/2\",\n            \"config\": {\n                \"id\": \"ethernet 1/1/2\"\n            }\n        }\n    ]\n}",
+							"raw": "{\n    \"interface\": [\n        {\n            \"id\": \"ethernet 1/1/8\",\n            \"config\": {\n                \"id\": \"ethernet 1/1/8\"\n            }\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -6383,12 +6496,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -6463,12 +6576,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -6545,12 +6658,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -6604,6 +6717,52 @@
 			"name": "POE",
 			"item": [
 				{
+					"name": "Get PoE on all interfaces",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get PoE enabled status on interface",
 					"event": [
 						{
@@ -6630,12 +6789,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -6669,52 +6828,6 @@
 					"response": []
 				},
 				{
-					"name": "Get PoE on all interfaces",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "ruckus123!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{host}}/restconf/data/interfaces",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"interfaces"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Get PoE configured status on interface",
 					"event": [
 						{
@@ -6741,12 +6854,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -6804,12 +6917,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -6868,12 +6981,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -6933,12 +7046,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -6998,12 +7111,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -7070,12 +7183,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -7142,12 +7255,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -7214,12 +7327,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -7277,12 +7390,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -7297,7 +7410,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"vlan\": [\n        {\n            \"vlan-id\": 33,\n            \"config\": {\n                \"vlan-id\": 33\n            }\n        }\n    ]\n}",
+							"raw": "{\n    \"vlan\": [\n        {\n            \"vlan-id\": 55,\n            \"config\": {\n                \"vlan-id\": 55\n            }\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -7333,12 +7446,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -7353,7 +7466,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"rapid-pvst\": {\n        \"vlan\": [\n            {\n                \"vlan-id\": 77,\n                \"config\": {\n                    \"vlan-id\": 77\n                }\n            }\n        ]\n    }\n}\n",
+							"raw": "{\n    \"rapid-pvst\": {\n        \"vlan\": [\n            {\n                \"vlan-id\": 66,\n                \"config\": {\n                    \"vlan-id\": 66\n                }\n            }\n        ]\n    }\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -7389,12 +7502,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -7435,12 +7548,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -7484,12 +7597,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -7540,12 +7653,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -7596,12 +7709,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -7658,13 +7771,13 @@
 							"type": "basic",
 							"basic": [
 								{
-									"key": "password",
-									"value": "ruckus123!",
+									"key": "username",
+									"value": "{{Username}}",
 									"type": "string"
 								},
 								{
-									"key": "username",
-									"value": "admin",
+									"key": "password",
+									"value": "{{Password}}",
 									"type": "string"
 								}
 							]
@@ -7705,7 +7818,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"let routeString = \"99.1.1.0/24\"",
+									"let routeString = \"0.0.0.0/0\"",
 									"let routeUrl = routeString.replace('/','%2F')",
 									"pm.collectionVariables.set(\"route\", routeUrl);"
 								],
@@ -7723,13 +7836,13 @@
 							"type": "basic",
 							"basic": [
 								{
-									"key": "password",
-									"value": "ruckus123!",
+									"key": "username",
+									"value": "{{Username}}",
 									"type": "string"
 								},
 								{
-									"key": "username",
-									"value": "admin",
+									"key": "password",
+									"value": "{{Password}}",
 									"type": "string"
 								}
 							]
@@ -7778,13 +7891,13 @@
 							"type": "basic",
 							"basic": [
 								{
-									"key": "password",
-									"value": "ruckus123!",
+									"key": "username",
+									"value": "{{Username}}",
 									"type": "string"
 								},
 								{
-									"key": "username",
-									"value": "admin",
+									"key": "password",
+									"value": "{{Password}}",
 									"type": "string"
 								}
 							]
@@ -7836,13 +7949,13 @@
 							"type": "basic",
 							"basic": [
 								{
-									"key": "password",
-									"value": "ruckus123!",
+									"key": "username",
+									"value": "{{Username}}",
 									"type": "string"
 								},
 								{
-									"key": "username",
-									"value": "admin",
+									"key": "password",
+									"value": "{{Password}}",
 									"type": "string"
 								}
 							]
@@ -7907,13 +8020,13 @@
 							"type": "basic",
 							"basic": [
 								{
-									"key": "password",
-									"value": "ruckus123!",
+									"key": "username",
+									"value": "{{Username}}",
 									"type": "string"
 								},
 								{
-									"key": "username",
-									"value": "admin",
+									"key": "password",
+									"value": "{{Password}}",
 									"type": "string"
 								}
 							]
@@ -7977,12 +8090,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -8026,12 +8139,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -8091,12 +8204,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -8140,12 +8253,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -8160,7 +8273,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"vlan\": [\n        {\n            \"vlan-id\": 667,\n            \"config\": {\n                \"vlan-id\": 667,\n                \"name\": \"user-vlan-667\"\n            }\n        }\n    ]\n}",
+							"raw": "{\n    \"vlan\": [\n        {\n            \"vlan-id\": 44,\n            \"config\": {\n                \"vlan-id\": 44,\n                \"name\": \"user-vlan-44\"\n            }\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -8198,12 +8311,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -8267,12 +8380,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -8341,12 +8454,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -8413,12 +8526,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -8485,12 +8598,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -8557,12 +8670,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -8629,12 +8742,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -8701,12 +8814,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -8777,12 +8890,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -8843,12 +8956,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -8898,12 +9011,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -8953,12 +9066,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -9008,12 +9121,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -9063,12 +9176,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -9082,7 +9195,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{host}}/restconf/data/interfaces/interface/ve 55",
+							"raw": "https://{{host}}/restconf/data/interfaces/interface/ve 33",
 							"protocol": "https",
 							"host": [
 								"{{host}}"
@@ -9092,7 +9205,7 @@
 								"data",
 								"interfaces",
 								"interface",
-								"ve 55"
+								"ve 33"
 							]
 						}
 					},
@@ -9111,12 +9224,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "ruckus123!",
+									"value": "{{Password}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "{{Username}}",
 									"type": "string"
 								}
 							]
@@ -9150,6 +9263,387 @@
 								"interfaces",
 								"interface",
 								"ve 55"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Filter examples",
+			"item": [
+				{
+					"name": "Get datastore and data models (JSON) with filter",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"host\", \"10.0.0.213\")",
+									"pm.collectionVariables.set(\"Username\", \"admin\")",
+									"pm.collectionVariables.set(\"Password\", \"simone\")"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data?fields=ietf-yang-library:modules-state/module(name;revision)",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "ietf-yang-library:modules-state/module(name;revision)"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all interfaces with filter 1",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces?fields=interface(name;config/enabled)",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "interface(name;config/enabled)"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all interfaces with filter 2",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces?fields=interface(name;config/enabled)",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "interface(name;config/enabled)"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all interfaces with filter for LAGs",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces?fields=interface/openconfig-if-aggregate:aggregation",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "interface/openconfig-if-aggregate:aggregation"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all interfaces with filter for physical interfaces",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces?fields=interface/openconfig-if-ethernet:ethernet",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "interface/openconfig-if-ethernet:ethernet"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all interfaces with filter for virtual interfaces",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces?fields=interface/openconfig-vlan:routed-vlan",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "interface/openconfig-vlan:routed-vlan"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all interfaces with filter for PoE status",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces?fields=interface/openconfig-if-ethernet:ethernet/openconfig-if-poe:poe",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "interface/openconfig-if-ethernet:ethernet/openconfig-if-poe:poe"
+								}
 							]
 						}
 					},

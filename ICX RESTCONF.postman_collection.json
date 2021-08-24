@@ -17,7 +17,7 @@
 								"exec": [
 									"pm.collectionVariables.set(\"host\", \"10.0.0.213\")",
 									"pm.collectionVariables.set(\"Username\", \"admin\")",
-									"pm.collectionVariables.set(\"Password\", \"password\")"
+									"pm.collectionVariables.set(\"Password\", \"ruckus123!\")"
 								],
 								"type": "text/javascript"
 							}
@@ -49,6 +49,61 @@
 							{
 								"key": "Accept",
 								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get top level resources (XML)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+xml",
 								"type": "text"
 							}
 						],
@@ -118,61 +173,6 @@
 							"path": [
 								"restconf",
 								"data"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get top level resources (XML)",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "username",
-									"value": "{{Username}}",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "{{Password}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+xml",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{host}}/restconf",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf"
 							]
 						}
 					},
@@ -8273,7 +8273,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"vlan\": [\n        {\n            \"vlan-id\": 44,\n            \"config\": {\n                \"vlan-id\": 44,\n                \"name\": \"user-vlan-44\"\n            }\n        }\n    ]\n}",
+							"raw": "{\n    \"vlan\": [\n        {\n            \"vlan-id\": 55,\n            \"config\": {\n                \"vlan-id\": 55,\n                \"name\": \"user-vlan-55\"\n            }\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -9274,7 +9274,7 @@
 			"name": "Filter examples",
 			"item": [
 				{
-					"name": "Get datastore and data models (JSON) with filter",
+					"name": "Get datastore modules name and revision",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -9338,59 +9338,7 @@
 					"response": []
 				},
 				{
-					"name": "Get all interfaces with filter 1",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "{{Password}}",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "{{Username}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{host}}/restconf/data/interfaces?fields=interface(name;config/enabled)",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"interfaces"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "interface(name;config/enabled)"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get all interfaces with filter 2",
+					"name": "Get all interfaces with enabled status",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -9643,6 +9591,162 @@
 								{
 									"key": "fields",
 									"value": "interface/openconfig-if-ethernet:ethernet/openconfig-if-poe:poe"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all interfaces with depth=4",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces?depth=4",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces"
+							],
+							"query": [
+								{
+									"key": "depth",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all interfaces with configuration parameters",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces?content=config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces"
+							],
+							"query": [
+								{
+									"key": "content",
+									"value": "config"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all interfaces with non-config parameters",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/interfaces?content=nonconfig",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"interfaces"
+							],
+							"query": [
+								{
+									"key": "content",
+									"value": "nonconfig"
 								}
 							]
 						}
